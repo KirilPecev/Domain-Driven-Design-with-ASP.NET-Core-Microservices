@@ -29,5 +29,11 @@
             public const int MinDescriptionLength = 5;
             public const int MaxDescriptionLength = 100;
         }
+
+        public class Manufacturer
+        {
+            public const int MinNameLength = 3;
+            public const int MaxNameLength = 50;
+        }
     }
 }
