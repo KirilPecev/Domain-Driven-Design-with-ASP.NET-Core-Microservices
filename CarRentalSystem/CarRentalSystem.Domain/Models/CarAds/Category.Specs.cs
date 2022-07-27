@@ -2,6 +2,7 @@
 {
     using Exceptions;
 
+    using FakeItEasy;
     using FluentAssertions;
     using Xunit;
 
@@ -11,7 +12,7 @@
         public void ValidCategoryShouldNotThrowException()
         {
             // Act
-            Action act = () => new Category("Valid name", "Valid description text");
+            Action act = () => A.Dummy<Category>();
 
             // Assert
             act.Should().NotThrow<InvalidCarAdException>();
