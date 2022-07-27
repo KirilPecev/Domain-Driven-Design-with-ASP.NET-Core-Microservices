@@ -3,6 +3,8 @@
     public abstract class Entity<TId>
         where TId : struct
     {
+        // TODO: Add events logic
+
         public TId Id { get; private set; }
 
         public override bool Equals(object? obj)

@@ -1,0 +1,33 @@
+﻿namespace CarRentalSystem.Domain.Models
+{
+    public class ModelConstants
+    {
+        public class Common
+        {
+            public const int MaxUrlLength = 2048;
+        }
+
+        public class Dealer
+        {
+            public const int MinNameLength = 3;
+            public const int MaxNameLength = 50;
+        }
+
+        public class PhoneNumber
+        {
+            public const int MinPhoneNumberLength = 5;
+            public const int MaxPhoneNumberLength = 20;
+
+            public const string PhoneNumberRegularExpression = @"\+[0-9]*";
+        }
+
+        public class Category
+        {
+            public const int MinNameLength = 3;
+            public const int MaxNameLength = 50;
+
+            public const int MinDescriptionLength = 5;
+            public const int MaxDescriptionLength = 100;
+        }
+    }
+}
