@@ -10,16 +10,16 @@
         {
             public Priority Priority => Priority.Default;
 
-            public bool CanCreate(Type type) => type == typeof(CarAdDummyFactory);
+            public bool CanCreate(Type type) => type == typeof(CarAd);
 
             public object? Create(Type type)
                 => new CarAd(
-                    new Manufacturer("Valid manufacturer"),
+                    A.Dummy<Manufacturer>(),
                     "Valid model",
-                    new Category("Valid category", "Valid description text"),
+                    A.Dummy<Category>(),
                     "https://valid.test",
                     10,
-                    new Options(true, 4, TransmissionType.Automatic),
+                    A.Dummy<Options>(),
                     true);
         }
     }

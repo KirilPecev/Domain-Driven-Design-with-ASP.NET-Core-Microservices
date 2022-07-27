@@ -15,7 +15,7 @@
 
         internal Options(bool hasClimateControl, int numberOfSeats, TransmissionType transmissionType)
         {
-            this.Validate(NumberOfSeats);
+            this.Validate(numberOfSeats);
 
             this.HasClimateControl = hasClimateControl;
             this.NumberOfSeats = numberOfSeats;
