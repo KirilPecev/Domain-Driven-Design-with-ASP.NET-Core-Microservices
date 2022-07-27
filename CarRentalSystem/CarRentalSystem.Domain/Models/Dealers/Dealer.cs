@@ -17,15 +17,17 @@
         public IReadOnlyCollection<CarAd> CarAds => this.carAds.ToList().AsReadOnly();
 
         internal Dealer(string name, PhoneNumber phoneNumber)
-            : this(name)
         {
+            this.Validate(name);
+
+            this.Name = name;
             PhoneNumber = phoneNumber;
+
+            this.carAds = new HashSet<CarAd>();
         }
 
         private Dealer(string name)
         {
-            this.Validate(name);
-
             this.Name = name;
             this.PhoneNumber = default!;
 

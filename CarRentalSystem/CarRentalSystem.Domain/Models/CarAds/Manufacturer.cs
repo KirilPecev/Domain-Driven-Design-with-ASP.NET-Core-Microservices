@@ -7,7 +7,7 @@
 
     public class Manufacturer : Entity<int>
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         internal Manufacturer(string name)
         {

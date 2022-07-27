@@ -35,5 +35,11 @@
             public const int MinNameLength = 3;
             public const int MaxNameLength = 50;
         }
+
+        public class Options
+        {
+            public const int MinNumberOfSeats = 1;
+            public const int MaxNumberOfSeats = 30;
+        }
     }
 }
