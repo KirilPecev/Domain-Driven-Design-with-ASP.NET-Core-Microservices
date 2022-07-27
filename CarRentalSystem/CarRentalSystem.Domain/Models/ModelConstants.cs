@@ -5,6 +5,7 @@
         public class Common
         {
             public const int MaxUrlLength = 2048;
+            public const int Zero = 0;
         }
 
         public class Dealer
@@ -40,6 +41,12 @@
         {
             public const int MinNumberOfSeats = 1;
             public const int MaxNumberOfSeats = 30;
+        }
+
+        public class CarAd
+        {
+            public const int MinModelLength = 2;
+            public const int MaxModelLength = 20;
         }
     }
 }
