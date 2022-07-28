@@ -5,7 +5,7 @@
 
     public abstract class Enumeration : IComparable
     {
-        private static readonly ConcurrentDictionary<Type, IEnumerable<object>> EnumCache = new();
+        private static readonly ConcurrentDictionary<Type, IEnumerable<object>> EnumCache;
 
         public string Name { get; set; }
 
@@ -21,6 +21,11 @@
         {
             this.Value = value;
             this.Name = name;
+        }
+
+        static Enumeration()
+        {
+            EnumCache = new();
         }
 
         public override string ToString() => this.Name;

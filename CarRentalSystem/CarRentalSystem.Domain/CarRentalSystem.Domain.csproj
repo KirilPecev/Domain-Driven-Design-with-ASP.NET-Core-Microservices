@@ -8,7 +8,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<ProjectCapability Include="ConfigurableFileNesting"/>
+		<ProjectCapability Include="ConfigurableFileNesting" />
 	    <ProjectCapability Include="ConfigurableFileNestingFeatureEnabled" />
 	</ItemGroup>
 
@@ -30,6 +30,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-    </ItemGroup>
+		<PackageReference Include="Bogus" Version="34.0.2" />
+	</ItemGroup>
 
 </Project>

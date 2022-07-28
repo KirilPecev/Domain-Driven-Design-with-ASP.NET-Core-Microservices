@@ -1,6 +1,7 @@
 ﻿namespace CarRentalSystem.Domain.Models.Dealers
 {
     using CarAds;
+
     using FakeItEasy;
     using FluentAssertions;
     using Xunit;

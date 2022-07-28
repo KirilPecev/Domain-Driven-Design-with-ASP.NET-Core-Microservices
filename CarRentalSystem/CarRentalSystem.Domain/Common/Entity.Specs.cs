@@ -37,7 +37,11 @@
 
     internal static class EntityExtensions
     {
-        public static Entity<T> SetId<T>(this Entity<T> entity, int id)
+        public static TEntity SetId<TEntity>(this TEntity entity, int id)
+            where TEntity : Entity<int>
+            => (entity.SetId<int>(id) as TEntity)!;
+
+        private static Entity<T> SetId<T>(this Entity<T> entity, int id)
             where T : struct
         {
             entity
