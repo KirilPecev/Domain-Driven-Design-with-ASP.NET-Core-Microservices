@@ -21,7 +21,7 @@
             this.Validate(name);
 
             this.Name = name;
-            PhoneNumber = phoneNumber;
+            this.PhoneNumber = phoneNumber;
 
             this.carAds = new HashSet<CarAd>();
         }
