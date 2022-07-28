@@ -7,6 +7,11 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
+	<ItemGroup>
+		<ProjectCapability Include="ConfigurableFileNesting"/>
+	    <ProjectCapability Include="ConfigurableFileNestingFeatureEnabled" />
+	</ItemGroup>
+
     <ItemGroup Condition="'$(Configiration)' == 'Release'">
         <Compile Remove="**\*.Specs.cs" />
         <Compile Remove="**\*.Fakes.cs" />
