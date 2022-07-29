@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalSystem.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(CarRentalDbContext))]
-    [Migration("20220728192115_InitialDomainTables")]
+    [Migration("20220729073956_InitialDomainTables")]
     partial class InitialDomainTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -167,10 +167,6 @@ namespace CarRentalSystem.Infrastructure.Persistence.Migrations
                                 {
                                     b2.Property<int>("OptionsCarAdId")
                                         .HasColumnType("int");
-
-                                    b2.Property<string>("Name")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
 
                                     b2.Property<int>("Value")
                                         .HasColumnType("int");

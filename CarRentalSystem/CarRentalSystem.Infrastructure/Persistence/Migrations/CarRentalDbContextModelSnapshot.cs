@@ -166,10 +166,6 @@ namespace CarRentalSystem.Infrastructure.Persistence.Migrations
                                     b2.Property<int>("OptionsCarAdId")
                                         .HasColumnType("int");
 
-                                    b2.Property<string>("Name")
-                                        .IsRequired()
-                                        .HasColumnType("nvarchar(max)");
-
                                     b2.Property<int>("Value")
                                         .HasColumnType("int");
 

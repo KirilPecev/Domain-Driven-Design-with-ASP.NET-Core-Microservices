@@ -61,6 +61,7 @@
                             t.WithOwner();
 
                             t.Property(tr => tr.Value);
+                            t.Ignore(tr => tr.Name);
                         });
                 });
 
