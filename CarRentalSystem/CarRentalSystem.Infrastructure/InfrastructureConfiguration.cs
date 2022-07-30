@@ -18,6 +18,7 @@
                         configuration.GetConnectionString("DefaultConnection"),
                         b => b.MigrationsAssembly(typeof(CarRentalDbContext)
                             .Assembly.FullName)))
+                .AddTransient<IInitializer, CarRentalDbInitializer>()
                 .AddTransient(typeof(IRepository<>), typeof(DataRepository<>));
     }
 }
