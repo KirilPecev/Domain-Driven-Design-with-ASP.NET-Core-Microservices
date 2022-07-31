@@ -8,8 +8,8 @@
 
         public UserInputModel(string email, string password)
         {
-            Email = email;
-            Password = password;
+            this.Email = email;
+            this.Password = password;
         }
     }
 }
