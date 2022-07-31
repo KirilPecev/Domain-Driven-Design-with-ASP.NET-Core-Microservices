@@ -1,7 +1,5 @@
 ﻿namespace CarRentalSystem.Application
 {
-    using Common;
-
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 

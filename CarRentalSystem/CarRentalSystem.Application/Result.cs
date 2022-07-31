@@ -1,4 +1,4 @@
-﻿namespace CarRentalSystem.Application.Common
+﻿namespace CarRentalSystem.Application
 {
     public class Result
     {
@@ -8,11 +8,11 @@
 
         internal Result(bool succeeded, List<string> errors)
         {
-            this.Succeeded = succeeded;
+            Succeeded = succeeded;
             this.errors = errors;
         }
 
-        public List<string> Errors => this.Succeeded ? new List<string>() : this.errors;
+        public List<string> Errors => Succeeded ? new List<string>() : errors;
 
         public static Result Success
             => new Result(true, new List<string>());
@@ -42,10 +42,10 @@
             => this.data = data;
 
         public TData Data
-            => this.Succeeded
-                ? this.data
+            => Succeeded
+                ? data
                 : throw new InvalidOperationException(
-                    $"{nameof(this.Data)} is not available with a failed result. Use {this.Errors} instead.");
+                    $"{nameof(Data)} is not available with a failed result. Use {Errors} instead.");
 
         public static Result<TData> SuccessWith(TData data)
             => new Result<TData>(true, data, new List<string>());
