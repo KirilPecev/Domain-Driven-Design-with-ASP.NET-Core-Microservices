@@ -7,6 +7,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [ApiController]
+    [Route("[controller]")]
     public class IdentityController : ControllerBase
     {
         private readonly IIdentity identity;
@@ -43,9 +45,6 @@
 
         [HttpGet]
         [Authorize]
-        public IActionResult Get()
-        {
-            return this.Ok(this.User.Identity.Name);
-        }
+        public IActionResult Get() => this.Ok(this.User?.Identity?.Name);
     }
 }
