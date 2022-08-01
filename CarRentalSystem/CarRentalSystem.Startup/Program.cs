@@ -1,4 +1,5 @@
 using CarRentalSystem.Application;
+using CarRentalSystem.Domain;
 using CarRentalSystem.Infrastructure;
 using CarRentalSystem.Startup;
 using CarRentalSystem.Web;
@@ -6,6 +7,7 @@ using CarRentalSystem.Web;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDomain();
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddWebComponents();
