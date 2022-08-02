@@ -1,7 +1,6 @@
 ﻿namespace CarRentalSystem.Web.Features
 {
     using Application;
-    using Application.Contracts;
     using Application.Features.Identity;
     using Application.Features.Identity.Commands.LoginUser;
     using Common;

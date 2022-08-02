@@ -1,10 +1,11 @@
-﻿using CarRentalSystem.Application.Features.CarAds;
-using CarRentalSystem.Application.Features.CarAds.Queries.Search;
-using CarRentalSystem.Domain.Models.CarAds;
-using Microsoft.EntityFrameworkCore;
-
-namespace CarRentalSystem.Infrastructure.Persistence.Repositories
+﻿namespace CarRentalSystem.Infrastructure.Persistence.Repositories
 {
+    using Application.Features.CarAds;
+    using Application.Features.CarAds.Queries.Search;
+    using Domain.Models.CarAds;
+
+    using Microsoft.EntityFrameworkCore;
+
     internal class CarAdRepository : DataRepository<CarAd>, ICarAdRepository
     {
         public CarAdRepository(CarRentalDbContext db)
