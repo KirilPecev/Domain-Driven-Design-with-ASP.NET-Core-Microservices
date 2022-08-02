@@ -1,8 +1,9 @@
-﻿using CarRentalSystem.Application;
-using Microsoft.AspNetCore.Mvc;
-
-namespace CarRentalSystem.Web.Common
+﻿namespace CarRentalSystem.Web.Common
 {
+    using Application;
+
+    using Microsoft.AspNetCore.Mvc;
+
     public static class ResultExtensions
     {
         public static async Task<ActionResult<TData>> ToActionResult<TData>(this Task<TData> resultTask)

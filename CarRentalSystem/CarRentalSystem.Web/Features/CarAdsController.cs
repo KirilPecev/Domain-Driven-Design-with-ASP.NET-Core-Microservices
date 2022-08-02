@@ -8,6 +8,6 @@
     {
         [HttpGet]
         public async Task<ActionResult<SearchCarAdsOutputModel>> Get([FromQuery] SearchCarAdsQuery query)
-            => await this.Mediator.Send(query);
+            => await this.Send(query);
     }
 }
