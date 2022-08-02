@@ -3,13 +3,12 @@
     using Application;
     using Application.Contracts;
     using Application.Features.Identity;
+    using Application.Features.Identity.Commands.LoginUser;
+    using Common;
 
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [ApiController]
-    [Route("[controller]")]
-    public class IdentityController : ControllerBase
+    public class IdentityController : ApiController
     {
         private readonly IIdentity identity;
 
@@ -31,20 +30,7 @@
 
         [HttpPost]
         [Route(nameof(Login))]
-        public async Task<ActionResult<LoginOutputModel>> Login(UserInputModel model)
-        {
-            var result = await this.identity.Login(model);
-
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            return result.Data;
-        }
-
-        [HttpGet]
-        [Authorize]
-        public IActionResult Get() => this.Ok(this.User?.Identity?.Name);
+        public async Task<ActionResult<LoginOutputModel>> Login(LoginUserCommand command)
+            => await this.Mediator.Send(command).ToActionResult();
     }
 }

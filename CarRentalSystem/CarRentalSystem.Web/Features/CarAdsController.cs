@@ -5,9 +5,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    [ApiController]
-    [Route("[controller]")]
-    public class CarAdsController : ControllerBase
+    public class CarAdsController : ApiController
     {
         private readonly IRepository<CarAd> carAds;
 
