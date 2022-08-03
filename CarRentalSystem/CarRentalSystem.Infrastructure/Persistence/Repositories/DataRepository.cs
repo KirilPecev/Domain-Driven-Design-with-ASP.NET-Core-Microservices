@@ -8,10 +8,10 @@
     internal abstract class DataRepository<TEnitity> : IRepository<TEnitity>
         where TEnitity : class, IAggregateRoot
     {
-        private readonly CarRentalDbContext db;
+        protected CarRentalDbContext Data { get; }
 
-        protected DataRepository(CarRentalDbContext db) => this.db = db;
+        protected DataRepository(CarRentalDbContext db) => this.Data = db;
 
-        protected IQueryable<TEnitity> All() => this.db.Set<TEnitity>();
+        protected IQueryable<TEnitity> All() => this.Data.Set<TEnitity>();
     }
 }

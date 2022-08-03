@@ -5,9 +5,9 @@
     using System.Text;
 
     using Application;
-    using Application.Contracts;
     using Application.Features.Identity;
-    using CarRentalSystem.Application.Features.Identity.Commands.LoginUser;
+    using Application.Features.Identity.Commands.LoginUser;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
@@ -44,7 +44,7 @@
             return new LoginOutputModel(token);
         }
 
-        public async Task<Result> Register(UserInputModel userInput)
+        public async Task<Result<IUser>> Register(UserInputModel userInput)
         {
             User user = new User(userInput.Email);
 
@@ -52,7 +52,7 @@
 
             IEnumerable<string> errors = identityResult.Errors.Select(e => e.Description);
 
-            return identityResult.Succeeded ? Result.Success : Result.Failure(errors);
+            return identityResult.Succeeded ? Result<IUser>.SuccessWith(user) : Result<IUser>.Failure(errors);
         }
 
         private string GenerateJwtToken(string userId, string email)
