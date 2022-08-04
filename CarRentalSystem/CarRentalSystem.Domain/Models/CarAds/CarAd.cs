@@ -2,11 +2,15 @@
 {
     using Common;
     using Exceptions;
+
     using static ModelConstants.CarAd;
     using static ModelConstants.Common;
 
     public class CarAd : Entity<int>, IAggregateRoot
     {
+        private static readonly IEnumerable<Category> AllowedCategories
+            = new CategoryData().GetData().Cast<Category>();
+
         public Manufacturer Manufacturer { get; private set; }
 
         public string Model { get; private set; }
@@ -31,7 +35,7 @@
             bool isAvailable)
         {
             this.Validate(model, imageUrl, pricePerDay);
-            //this.ValidateCategory(category);
+            this.ValidateCategory(category);
 
             this.Manufacturer = manufacturer;
             this.Model = model;
@@ -147,18 +151,15 @@
                 decimal.MaxValue,
                 nameof(this.PricePerDay));
 
-        //private void ValidateCategory(Category category)
-        //{
-        //    string? categoryName = category?.Name;
+        private void ValidateCategory(Category category)
+        {
+            string? categoryName = category?.Name;
 
-        //    if (AllowedCategories.Any(c => c.Name == categoryName))
-        //    {
-        //        return;
-        //    }
+            if (AllowedCategories.Any(c => c.Name == categoryName)) return;
 
-        //    string? allowedCategoryNames = string.Join(", ", AllowedCategories.Select(c => $"'{c.Name}'"));
+            string allowedCategoryNames = string.Join(", ", AllowedCategories.Select(c => $"'{c.Name}'"));
 
-        //    throw new InvalidCarAdException($"'{categoryName}' is not a valid category. Allowed values are: {allowedCategoryNames}.");
-        //}
+            throw new InvalidCarAdException($"'{categoryName}' is not a valid category. Allowed values are: {allowedCategoryNames}.");
+        }
     }
 }
