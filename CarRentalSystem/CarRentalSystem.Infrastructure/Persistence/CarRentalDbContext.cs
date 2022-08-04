@@ -17,6 +17,8 @@
 
         public DbSet<Category> Categories { get; set; } = default!;
 
+        public DbSet<Manufacturer> Manufacturers { get; set; } = default!;
+
         public DbSet<Dealer> Dealers { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

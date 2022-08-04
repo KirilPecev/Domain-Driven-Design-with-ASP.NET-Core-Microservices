@@ -6,11 +6,11 @@
 
     using Microsoft.AspNetCore.Http;
 
-    public class CurrentUserServices : ICurrentUser
+    public class CurrentUserService : ICurrentUser
     {
         public string UserId { get; }
 
-        public CurrentUserServices(IHttpContextAccessor httpContextAccessor)
+        public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         {
             ClaimsPrincipal? user = httpContextAccessor.HttpContext?.User;
 
