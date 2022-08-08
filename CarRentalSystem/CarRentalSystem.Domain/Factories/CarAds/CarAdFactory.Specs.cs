@@ -64,7 +64,7 @@
             // Act
             var carAd = carAdFactory
                 .WithManufacturer("TestManufacturer")
-                .WithCategory("TestCategory", "TestCategoryDescription")
+                .WithCategory("Economy", "TestCategoryDescription")
                 .WithOptions(true, 2, TransmissionType.Automatic)
                 .WithImageUrl("http://test.image.url")
                 .WithModel("TestModel")
