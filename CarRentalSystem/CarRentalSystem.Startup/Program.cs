@@ -3,6 +3,7 @@ using CarRentalSystem.Domain;
 using CarRentalSystem.Infrastructure;
 using CarRentalSystem.Startup;
 using CarRentalSystem.Web;
+using CarRentalSystem.Web.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseValidationExceptionHandler();
 
 app.UseHttpsRedirection();
 
