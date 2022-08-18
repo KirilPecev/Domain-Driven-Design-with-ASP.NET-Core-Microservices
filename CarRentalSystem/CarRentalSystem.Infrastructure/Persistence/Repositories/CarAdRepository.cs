@@ -2,14 +2,18 @@
 {
     using Application.Features.CarAds;
     using Application.Features.CarAds.Queries.Search;
+    using AutoMapper;
     using Domain.Models.CarAds;
 
     using Microsoft.EntityFrameworkCore;
 
     internal class CarAdRepository : DataRepository<CarAd>, ICarAdRepository
     {
-        public CarAdRepository(CarRentalDbContext db)
-            : base(db) { }
+        private readonly IMapper mapper;
+
+        public CarAdRepository(CarRentalDbContext db, IMapper mapper)
+            : base(db)
+            => this.mapper = mapper;
 
         public async Task<IEnumerable<CarAdListingModel>> GetCarAdListings(string? manufacturer = null, CancellationToken cancellationToken = default)
         {
@@ -23,15 +27,9 @@
                         .Like(car.Manufacturer.Name, $"%{manufacturer}%"));
             }
 
-            return await query
-               .Select(car => new CarAdListingModel(
-                   car.Id,
-                   car.Manufacturer.Name,
-                   car.Model,
-                   car.ImageUrl,
-                   car.Category.Name,
-                   car.PricePerDay))
-               .ToListAsync(cancellationToken);
+            return await this.mapper
+                .ProjectTo<CarAdListingModel>(query)
+                .ToListAsync(cancellationToken);
         }
 
         public async Task<Category> GetCategory(int categoryId, CancellationToken cancellationToken)
