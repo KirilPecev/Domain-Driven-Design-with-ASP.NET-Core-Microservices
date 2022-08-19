@@ -22,7 +22,7 @@
                 return true;
             }
 
-            var func = DelegateCache.GetOrAdd(
+            Func<T, bool> func = DelegateCache.GetOrAdd(
                 string.Join(string.Empty, this.cacheKey),
                 _ => this.ToExpression().Compile());
 
