@@ -82,7 +82,7 @@
                     ? Expression.AndAlso(leftExpression.Body, rightExpression.Body)
                     : Expression.OrElse(leftExpression.Body, rightExpression.Body);
 
-                var parameter = Expression.Parameter(typeof(T));
+                ParameterExpression parameter = Expression.Parameter(typeof(T));
                 body = (BinaryExpression)new ParameterReplacer(parameter).Visit(body);
 
                 body = body ?? throw new InvalidOperationException("Binary expression cannot be null.");
