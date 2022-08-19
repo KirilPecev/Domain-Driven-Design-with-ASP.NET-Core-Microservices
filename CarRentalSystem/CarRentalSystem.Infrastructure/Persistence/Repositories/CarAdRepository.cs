@@ -4,6 +4,7 @@
     using Application.Features.CarAds.Queries.Search;
     using AutoMapper;
     using Domain.Models.CarAds;
+    using Domain.Specifications;
 
     using Microsoft.EntityFrameworkCore;
 
@@ -15,22 +16,14 @@
             : base(db)
             => this.mapper = mapper;
 
-        public async Task<IEnumerable<CarAdListingModel>> GetCarAdListings(string? manufacturer = null, CancellationToken cancellationToken = default)
-        {
-            var query = this.AllAvailable();
-
-            if (!string.IsNullOrWhiteSpace(manufacturer))
-            {
-                query = query
-                    .Where(car => EF
-                        .Functions
-                        .Like(car.Manufacturer.Name, $"%{manufacturer}%"));
-            }
-
-            return await this.mapper
-                .ProjectTo<CarAdListingModel>(query)
+        public async Task<IEnumerable<CarAdListingModel>> GetCarAdListings(
+            Specification<CarAd> specification,
+            CancellationToken cancellationToken = default)
+            => await this.mapper
+                .ProjectTo<CarAdListingModel>(this
+                    .AllAvailable()
+                    .Where(specification))
                 .ToListAsync(cancellationToken);
-        }
 
         public async Task<Category> GetCategory(int categoryId, CancellationToken cancellationToken)
             => await this

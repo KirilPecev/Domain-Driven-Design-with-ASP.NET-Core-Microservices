@@ -1,5 +1,6 @@
 ﻿namespace CarRentalSystem.Infrastructure
 {
+    using System.Reflection;
     using Application.Features.CarAds;
     using FluentAssertions;
     using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@
 
             // Act
             var services = serviceCollection
+                .AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddRepositories()
                 .BuildServiceProvider();
 
