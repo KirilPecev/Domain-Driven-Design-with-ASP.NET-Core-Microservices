@@ -4,6 +4,8 @@
     using System.Threading.Tasks;
 
     using Application.Features.Dealers;
+    using AutoMapper;
+    using CarRentalSystem.Application.Features.Dealers.Queries.Details;
     using CarRentalSystem.Domain.Exceptions;
     using Domain.Models.Dealers;
 
@@ -11,7 +13,10 @@
 
     internal class DealerRepository : DataRepository<Dealer>, IDealerRepository
     {
-        public DealerRepository(CarRentalDbContext db) : base(db) { }
+        private readonly IMapper mapper;
+
+        public DealerRepository(CarRentalDbContext db, IMapper mapper) : base(db)
+            => this.mapper = mapper;
 
         public async Task<Dealer> FindByUser(string userId, CancellationToken cancellationToken)
         {
@@ -29,5 +34,12 @@
 
             return dealer;
         }
+
+        public async Task<DealerDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken)
+            => await this.mapper
+                .ProjectTo<DealerDetailsOutputModel>(this
+                    .All()
+                    .Where(d => d.Id == id))
+                .FirstOrDefaultAsync(cancellationToken);
     }
 }
