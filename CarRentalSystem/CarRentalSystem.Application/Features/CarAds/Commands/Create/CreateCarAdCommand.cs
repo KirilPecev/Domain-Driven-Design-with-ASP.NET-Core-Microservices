@@ -1,5 +1,6 @@
 ﻿namespace CarRentalSystem.Application.Features.CarAds.Commands.Create
 {
+    using Common;
     using Contracts;
     using Domain.Common;
     using Domain.Factories.CarAds;
@@ -9,44 +10,8 @@
 
     using MediatR;
 
-    public class CreateCarAdCommand : IRequest<CreateCarAdOutputModel>
+    public class CreateCarAdCommand : CarAdCommand<CreateCarAdCommand>, IRequest<CreateCarAdOutputModel>
     {
-        public string Manufacturer { get; }
-
-        public string Model { get; }
-
-        public int Category { get; }
-
-        public string ImageUrl { get; }
-
-        public decimal PricePerDay { get; }
-
-        public bool ClimateControl { get; }
-
-        public int NumberOfSeats { get; }
-
-        public int TransmissionType { get; }
-
-        public CreateCarAdCommand(
-            string manufacturer,
-            string model,
-            int category,
-            string imageUrl,
-            decimal pricePerDay,
-            bool climateControl,
-            int numberOfSeats,
-            int transmissionType)
-        {
-            this.Manufacturer = manufacturer;
-            this.Model = model;
-            this.Category = category;
-            this.ImageUrl = imageUrl;
-            this.PricePerDay = pricePerDay;
-            this.ClimateControl = climateControl;
-            this.NumberOfSeats = numberOfSeats;
-            this.TransmissionType = transmissionType;
-        }
-
         public class CreateCarAdCommandHandler : IRequestHandler<CreateCarAdCommand, CreateCarAdOutputModel>
         {
             private readonly ICurrentUser currentUser;
@@ -86,7 +51,7 @@
                     .WithImageUrl(request.ImageUrl)
                     .WithPricePerDay(request.PricePerDay)
                     .WithOptions(
-                        request.ClimateControl,
+                        request.HasClimateControl,
                         request.NumberOfSeats,
                         Enumeration.FromValue<TransmissionType>(request.TransmissionType))
                     .Build();
