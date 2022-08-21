@@ -1,6 +1,7 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Repositories
 {
     using Application.Features.CarAds;
+    using Application.Features.CarAds.Queries.Details;
     using Application.Features.CarAds.Queries.Search;
     using AutoMapper;
     using Domain.Models.CarAds;
@@ -30,6 +31,13 @@
                 .Data
                 .Categories
                 .FirstOrDefaultAsync(c => c.Id == categoryId, cancellationToken);
+
+        public async Task<CarAdDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken)
+            => await this.mapper
+                .ProjectTo<CarAdDetailsOutputModel>(this
+                    .AllAvailable()
+                    .Where(c => c.Id == id))
+                .FirstOrDefaultAsync(cancellationToken);
 
         public async Task<Manufacturer> GetManufacturer(string manufacturer, CancellationToken cancellationToken)
             => await this

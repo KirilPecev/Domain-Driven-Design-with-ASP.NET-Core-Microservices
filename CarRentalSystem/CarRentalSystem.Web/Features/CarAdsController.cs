@@ -1,6 +1,7 @@
 ﻿namespace CarRentalSystem.Web.Features
 {
     using Application.Features.CarAds.Commands.Create;
+    using Application.Features.CarAds.Queries.Details;
     using Application.Features.CarAds.Queries.Search;
 
     using Microsoft.AspNetCore.Authorization;
@@ -16,5 +17,10 @@
         [Authorize]
         public async Task<ActionResult<CreateCarAdOutputModel>> Create(CreateCarAdCommand command)
             => await this.Send(command);
+
+        [HttpGet]
+        [Route(Id)]
+        public async Task<ActionResult<CarAdDetailsOutputModel>> Details([FromRoute] CarAdDetailsQuery query)
+            => await this.Send(query);
     }
 }

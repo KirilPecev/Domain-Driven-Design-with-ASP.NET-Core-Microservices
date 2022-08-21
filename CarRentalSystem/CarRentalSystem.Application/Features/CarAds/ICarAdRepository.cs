@@ -3,6 +3,7 @@
     using Contracts;
     using Domain.Models.CarAds;
     using Domain.Specifications;
+    using Queries.Details;
     using Queries.Search;
 
     public interface ICarAdRepository : IRepository<CarAd>
@@ -16,5 +17,7 @@
         Task<Category> GetCategory(int categoryId, CancellationToken cancellationToken);
 
         Task<Manufacturer> GetManufacturer(string manufacturer, CancellationToken cancellationToken);
+
+        Task<CarAdDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken);
     }
 }

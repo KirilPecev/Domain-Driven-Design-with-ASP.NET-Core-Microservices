@@ -4,9 +4,10 @@
     using System.Threading.Tasks;
 
     using Application.Features.Dealers;
+    using Application.Features.Dealers.Queries.Common;
+    using Application.Features.Dealers.Queries.Details;
     using AutoMapper;
-    using CarRentalSystem.Application.Features.Dealers.Queries.Details;
-    using CarRentalSystem.Domain.Exceptions;
+    using Domain.Exceptions;
     using Domain.Models.Dealers;
 
     using Microsoft.EntityFrameworkCore;
@@ -41,5 +42,12 @@
                     .All()
                     .Where(d => d.Id == id))
                 .FirstOrDefaultAsync(cancellationToken);
+
+        public async Task<DealerOutputModel> GetDetailsByCarId(int id, CancellationToken cancellationToken)
+            => await this.mapper
+                .ProjectTo<DealerOutputModel>(this
+                    .All()
+                    .Where(d => d.CarAds.Any(ad => ad.Id == id)))
+                .SingleOrDefaultAsync(cancellationToken);
     }
 }

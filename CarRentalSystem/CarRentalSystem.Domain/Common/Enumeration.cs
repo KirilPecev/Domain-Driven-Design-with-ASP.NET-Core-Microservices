@@ -59,6 +59,9 @@
 
         public int CompareTo(object? other) => this.Value.CompareTo(((Enumeration)other!).Value);
 
+        public static string NameFromValue<T>(int value) where T : Enumeration
+            => FromValue<T>(value).Name;
+
         public static T FromValue<T>(int value) where T : Enumeration
             => Parse<T, int>(value, "value", item => item.Value == value);
 
