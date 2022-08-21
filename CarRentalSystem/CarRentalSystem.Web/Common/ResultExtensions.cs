@@ -1,14 +1,13 @@
 ﻿namespace CarRentalSystem.Web.Common
 {
-    using Application;
-
+    using Application.Common;
     using Microsoft.AspNetCore.Mvc;
 
     public static class ResultExtensions
     {
         public static async Task<ActionResult<TData>> ToActionResult<TData>(this Task<TData> resultTask)
         {
-            var result = await resultTask;
+            TData result = await resultTask;
 
             if (result == null)
             {
@@ -20,7 +19,7 @@
 
         public static async Task<ActionResult> ToActionResult(this Task<Result> resultTask)
         {
-            var result = await resultTask;
+            Result result = await resultTask;
 
             if (!result.Succeeded)
             {
@@ -32,7 +31,7 @@
 
         public static async Task<ActionResult<TData>> ToActionResult<TData>(this Task<Result<TData>> resultTask)
         {
-            var result = await resultTask;
+            Result<TData> result = await resultTask;
 
             if (!result.Succeeded)
             {

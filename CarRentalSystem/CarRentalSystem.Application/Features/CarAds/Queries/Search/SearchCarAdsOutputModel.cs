@@ -1,15 +1,12 @@
 ﻿namespace CarRentalSystem.Application.Features.CarAds.Queries.Search
 {
-    public class SearchCarAdsOutputModel
+    using CarAds.Common;
+
+    public class SearchCarAdsOutputModel : CarAdsOutputModel<CarAdOutputModel>
     {
-        internal SearchCarAdsOutputModel(IEnumerable<CarAdListingModel> carAds, int total)
-        {
-            this.CarAds = carAds;
-            this.Total = total;
-        }
-
-        public IEnumerable<CarAdListingModel> CarAds { get; }
-
-        public int Total { get; }
+        public SearchCarAdsOutputModel(
+            IEnumerable<CarAdOutputModel> carAds,
+            int page,
+            int totalPages) : base(carAds, page, totalPages) { }
     }
 }

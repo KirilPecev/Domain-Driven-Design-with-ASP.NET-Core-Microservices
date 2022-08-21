@@ -1,12 +1,10 @@
 ﻿namespace CarRentalSystem.Web
 {
-    using Application;
+    using Application.Common;
     using Application.Contracts;
-
     using FluentValidation;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
-
     using Services;
 
     public static class WebConfiguration

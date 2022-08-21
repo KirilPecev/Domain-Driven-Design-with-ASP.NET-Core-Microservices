@@ -1,6 +1,6 @@
 ﻿namespace CarRentalSystem.Web
 {
-    using Application;
+    using Application.Common;
     using Common;
 
     using MediatR;

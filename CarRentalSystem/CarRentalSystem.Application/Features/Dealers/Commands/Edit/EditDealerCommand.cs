@@ -2,7 +2,7 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-
+    using CarRentalSystem.Application.Common;
     using Contracts;
     using Domain.Models.Dealers;
 

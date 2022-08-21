@@ -1,5 +1,6 @@
 ﻿namespace CarRentalSystem.Application.Features.Identity
 {
+    using CarRentalSystem.Application.Common;
     using Commands.LoginUser;
 
     public interface IIdentity

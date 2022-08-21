@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Application.Features.Dealers;
+    using CarRentalSystem.Application.Common;
     using Domain.Factories.Dealers;
     using Domain.Models.Dealers;
 

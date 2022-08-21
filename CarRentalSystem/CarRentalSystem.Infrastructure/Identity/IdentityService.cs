@@ -7,7 +7,7 @@
     using Application;
     using Application.Features.Identity;
     using Application.Features.Identity.Commands.LoginUser;
-
+    using CarRentalSystem.Application.Common;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;

@@ -2,7 +2,7 @@
 {
     using AutoMapper;
 
-    using Common;
+    using CarAds.Common;
     using Dealers.Queries.Common;
     using Domain.Common;
     using Domain.Models.CarAds;

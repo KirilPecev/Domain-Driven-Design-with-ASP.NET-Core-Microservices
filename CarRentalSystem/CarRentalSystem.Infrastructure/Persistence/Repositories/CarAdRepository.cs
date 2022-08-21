@@ -1,10 +1,13 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Repositories
 {
     using Application.Features.CarAds;
+    using Application.Features.CarAds.Common;
     using Application.Features.CarAds.Queries.Details;
     using Application.Features.CarAds.Queries.Search;
     using AutoMapper;
+    using Common;
     using Domain.Models.CarAds;
+    using Domain.Models.Dealers;
     using Domain.Specifications;
 
     using Microsoft.EntityFrameworkCore;
@@ -25,6 +28,21 @@
                     .AllAvailable()
                     .Where(specification))
                 .ToListAsync(cancellationToken);
+
+        public async Task<IEnumerable<TOutputModel>> GetCarAdListings<TOutputModel>(
+            Specification<CarAd> carAdSpecification,
+            Specification<Dealer> dealerSpecification,
+            CarAdsSortOrder searchOrder,
+            int skip = 0,
+            int take = int.MaxValue,
+            CancellationToken cancellationToken = default)
+            => (await this.mapper
+                .ProjectTo<TOutputModel>(this
+                    .GetCarAdsQuery(carAdSpecification, dealerSpecification)
+                    .Sort(searchOrder))
+                .ToListAsync(cancellationToken))
+                .Skip(skip)
+                .Take(take);
 
         public async Task<Category> GetCategory(int categoryId, CancellationToken cancellationToken)
             => await this
@@ -50,9 +68,27 @@
                 .AllAvailable()
                 .CountAsync(cancellationToken);
 
+        public async Task<int> Total(
+            Specification<CarAd> carAdSpecification,
+            Specification<Dealer> dealerSpecification,
+            CancellationToken cancellationToken)
+            => await this
+                .GetCarAdsQuery(carAdSpecification, dealerSpecification)
+                .CountAsync(cancellationToken);
+
         private IQueryable<CarAd> AllAvailable()
            => this
                .All()
                .Where(car => car.IsAvailable);
+
+        private IQueryable<CarAd> GetCarAdsQuery(
+            Specification<CarAd> carAdSpecification,
+            Specification<Dealer> dealerSpecification)
+            => this
+                .Data
+                .Dealers
+                .Where(dealerSpecification)
+                .SelectMany(d => d.CarAds)
+                .Where(carAdSpecification);
     }
 }

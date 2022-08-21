@@ -1,7 +1,9 @@
 ﻿namespace CarRentalSystem.Application.Features.CarAds
 {
+    using CarAds.Common;
     using Contracts;
     using Domain.Models.CarAds;
+    using Domain.Models.Dealers;
     using Domain.Specifications;
     using Queries.Details;
     using Queries.Search;
@@ -19,5 +21,18 @@
         Task<Manufacturer> GetManufacturer(string manufacturer, CancellationToken cancellationToken);
 
         Task<CarAdDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken);
+
+        Task<int> Total(
+            Specification<CarAd> carAdSpecification,
+            Specification<Dealer> dealerSpecification,
+            CancellationToken cancellationToken);
+
+        Task<IEnumerable<TOutputModel>> GetCarAdListings<TOutputModel>(
+            Specification<CarAd> carAdSpecification,
+            Specification<Dealer> dealerSpecification,
+            CarAdsSortOrder searchOrder,
+            int skip = 0,
+            int take = int.MaxValue,
+            CancellationToken cancellationToken = default);
     }
 }
