@@ -1,14 +1,19 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Repositories
 {
+    using System.Linq.Expressions;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Application.Features.Dealers;
     using Application.Features.Dealers.Queries.Common;
     using Application.Features.Dealers.Queries.Details;
+
     using AutoMapper;
+
     using Domain.Exceptions;
     using Domain.Models.Dealers;
+
+    using Identity;
 
     using Microsoft.EntityFrameworkCore;
 
@@ -19,22 +24,15 @@
         public DealerRepository(CarRentalDbContext db, IMapper mapper) : base(db)
             => this.mapper = mapper;
 
-        public async Task<Dealer> FindByUser(string userId, CancellationToken cancellationToken)
-        {
-            Dealer? dealer = await this
-                .Data
-                .Users
-                .Where(u => u.Id == userId)
-                .Select(u => u.Dealer)
-                .FirstOrDefaultAsync(cancellationToken);
+        public Task<int> GetDealerId(
+           string userId,
+           CancellationToken cancellationToken = default)
+           => this.FindByUser(userId, user => user.Dealer!.Id, cancellationToken);
 
-            if (dealer == null)
-            {
-                throw new InvalidDealerException("This user is not a dealer.");
-            }
-
-            return dealer;
-        }
+        public Task<Dealer> FindByUser(
+            string userId,
+            CancellationToken cancellationToken = default)
+            => this.FindByUser(userId, user => user.Dealer!, cancellationToken);
 
         public async Task<DealerDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken)
             => await this.mapper
@@ -49,5 +47,25 @@
                     .All()
                     .Where(d => d.CarAds.Any(ad => ad.Id == id)))
                 .SingleOrDefaultAsync(cancellationToken);
+
+        private async Task<T> FindByUser<T>(
+            string userId,
+            Expression<Func<User, T>> selector,
+            CancellationToken cancellationToken = default)
+        {
+            var dealerData = await this
+                .Data
+                .Users
+                .Where(u => u.Id == userId)
+                .Select(selector)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (dealerData == null)
+            {
+                throw new InvalidDealerException("This user is not a dealer.");
+            }
+
+            return dealerData;
+        }
     }
 }

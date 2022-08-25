@@ -12,5 +12,7 @@
         Task<DealerDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken);
 
         Task<DealerOutputModel> GetDetailsByCarId(int id, CancellationToken cancellationToken);
+
+        Task<int> GetDealerId(string userId, CancellationToken cancellationToken);
     }
 }

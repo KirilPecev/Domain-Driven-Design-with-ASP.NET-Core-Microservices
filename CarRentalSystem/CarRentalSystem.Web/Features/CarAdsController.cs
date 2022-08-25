@@ -2,6 +2,7 @@
 {
     using Application.Features.CarAds.Commands.Create;
     using Application.Features.CarAds.Queries.Details;
+    using Application.Features.CarAds.Queries.Mine;
     using Application.Features.CarAds.Queries.Search;
 
     using Microsoft.AspNetCore.Authorization;
@@ -21,6 +22,12 @@
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<CarAdDetailsOutputModel>> Details([FromRoute] CarAdDetailsQuery query)
+            => await this.Send(query);
+
+        [HttpGet]
+        [Authorize]
+        [Route(nameof(Mine))]
+        public async Task<ActionResult<MineCarAdsOutputModel>> Mine([FromRoute] MineCarAdsQuery query)
             => await this.Send(query);
     }
 }
