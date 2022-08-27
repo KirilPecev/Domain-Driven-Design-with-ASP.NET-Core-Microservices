@@ -2,6 +2,7 @@
 {
     using Application.Features.CarAds;
     using Application.Features.CarAds.Common;
+    using Application.Features.CarAds.Queries.Categories;
     using Application.Features.CarAds.Queries.Details;
     using Application.Features.CarAds.Queries.Search;
     using AutoMapper;
@@ -19,6 +20,26 @@
         public CarAdRepository(CarRentalDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
+
+        public async Task<IEnumerable<GetCarAdCategoryOutputModel>> GetCarAdCategories(CancellationToken cancellationToken)
+        {
+            Dictionary<int, GetCarAdCategoryOutputModel> categories = await this.mapper
+               .ProjectTo<GetCarAdCategoryOutputModel>(this.Data.Categories)
+               .ToDictionaryAsync(k => k.Id, cancellationToken);
+
+            var carAdsPerCategory = await this.AllAvailable()
+                .GroupBy(c => c.Category.Id)
+                .Select(gr => new
+                {
+                    CategoryId = gr.Key,
+                    TotalCarAds = gr.Count()
+                })
+                .ToListAsync(cancellationToken);
+
+            carAdsPerCategory.ForEach(c => categories[c.CategoryId].TotalCarAds = c.TotalCarAds);
+
+            return categories.Values;
+        }
 
         public async Task<IEnumerable<CarAdListingModel>> GetCarAdListings(
             Specification<CarAd> specification,
