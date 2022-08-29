@@ -14,5 +14,7 @@
         Task<DealerOutputModel> GetDetailsByCarId(int id, CancellationToken cancellationToken);
 
         Task<int> GetDealerId(string userId, CancellationToken cancellationToken);
+
+        Task<bool> HasCarAd(int dealerId, int carAdId, CancellationToken cancellationToken);
     }
 }

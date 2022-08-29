@@ -1,11 +1,11 @@
 ﻿namespace CarRentalSystem.Application.Features.CarAds
 {
     using CarAds.Common;
-    using CarRentalSystem.Application.Features.CarAds.Queries.Categories;
     using Contracts;
     using Domain.Models.CarAds;
     using Domain.Models.Dealers;
     using Domain.Specifications;
+    using Queries.Categories;
     using Queries.Details;
     using Queries.Search;
 
@@ -22,7 +22,9 @@
         Task<Manufacturer> GetManufacturer(string manufacturer, CancellationToken cancellationToken);
 
         Task<CarAdDetailsOutputModel> GetDetails(int id, CancellationToken cancellationToken);
+
         Task<IEnumerable<GetCarAdCategoryOutputModel>> GetCarAdCategories(CancellationToken cancellationToken);
+
         Task<int> Total(
             Specification<CarAd> carAdSpecification,
             Specification<Dealer> dealerSpecification,
@@ -35,5 +37,7 @@
             int skip = 0,
             int take = int.MaxValue,
             CancellationToken cancellationToken = default);
+
+        Task<CarAd> Find(int id, CancellationToken cancellationToken);
     }
 }

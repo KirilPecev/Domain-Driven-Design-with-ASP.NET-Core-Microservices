@@ -67,5 +67,12 @@
 
             return dealerData;
         }
+
+        public async Task<bool> HasCarAd(int dealerId, int carAdId, CancellationToken cancellationToken)
+            => await this
+                .All()
+                .Where(d => d.Id == dealerId)
+                .AnyAsync(d => d.CarAds
+                    .Any(c => c.Id == carAdId));
     }
 }

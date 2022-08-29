@@ -21,6 +21,12 @@
             : base(db)
             => this.mapper = mapper;
 
+        public async Task<CarAd> Find(int id, CancellationToken cancellationToken)
+            => await this
+                .All()
+                .Include(c => c.Manufacturer)
+                .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
+
         public async Task<IEnumerable<GetCarAdCategoryOutputModel>> GetCarAdCategories(CancellationToken cancellationToken)
         {
             Dictionary<int, GetCarAdCategoryOutputModel> categories = await this.mapper

@@ -1,6 +1,8 @@
 ﻿namespace CarRentalSystem.Web.Features
 {
+    using Application.Features;
     using Application.Features.CarAds.Commands.Create;
+    using Application.Features.CarAds.Commands.Edit;
     using Application.Features.CarAds.Queries.Categories;
     using Application.Features.CarAds.Queries.Details;
     using Application.Features.CarAds.Queries.Mine;
@@ -35,5 +37,11 @@
         [Route(nameof(Categories))]
         public async Task<ActionResult<IEnumerable<GetCarAdCategoryOutputModel>>> Categories([FromQuery] GetCarAdCategoriesQuery query)
             => await this.Send(query);
+
+        [HttpPut]
+        [Authorize]
+        [Route(Id)]
+        public async Task<ActionResult> Edit(int id, EditCarAdCommand command)
+            => await this.Send(command.SetId(id));
     }
 }
