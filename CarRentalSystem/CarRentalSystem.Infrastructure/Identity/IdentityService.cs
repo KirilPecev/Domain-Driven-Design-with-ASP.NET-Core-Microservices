@@ -8,6 +8,7 @@
     using Application.Common;
     using Application.Features.Identity;
     using Application.Features.Identity.Commands;
+    using Application.Features.Identity.Commands.ChangePassword;
     using Application.Features.Identity.Commands.LoginUser;
 
     using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,7 @@
 
     public class IdentityService : IIdentity
     {
-        private const string InvalidLoginErrorMessage = "Invalid credentials.";
+        private const string InvalidErrorMessage = "Invalid credentials.";
 
         private readonly UserManager<User> userManager;
         private readonly ApplicationSettings applicationSettings;
@@ -27,18 +28,37 @@
             this.applicationSettings = applicationSettings.Value;
         }
 
+        public async Task<Result> ChangePassword(ChangePasswordInputModel changePasswordInputModel)
+        {
+            User? user = await this.userManager.FindByIdAsync(changePasswordInputModel.UserId);
+
+            if (user == null)
+            {
+                return InvalidErrorMessage;
+            }
+
+            IdentityResult identityResult = await this.userManager.ChangePasswordAsync(
+                user,
+                changePasswordInputModel.CurrentPassword,
+                changePasswordInputModel.NewPassword);
+
+            IEnumerable<string> errors = identityResult.Errors.Select(e => e.Description);
+
+            return identityResult.Succeeded ? Result.Success : Result.Failure(errors);
+        }
+
         public async Task<Result<LoginSuccessModel>> Login(UserInputModel userInput)
         {
             User user = await this.userManager.FindByEmailAsync(userInput.Email);
             if (user == null)
             {
-                return InvalidLoginErrorMessage;
+                return InvalidErrorMessage;
             }
 
             bool isPasswordValid = await this.userManager.CheckPasswordAsync(user, userInput.Password);
             if (!isPasswordValid)
             {
-                return InvalidLoginErrorMessage;
+                return InvalidErrorMessage;
             }
 
             string token = this.GenerateJwtToken(user.Id, user.Email);
