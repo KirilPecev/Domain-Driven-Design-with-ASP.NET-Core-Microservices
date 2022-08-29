@@ -8,7 +8,7 @@
     using Application.Features.CarAds.Queries.Details;
     using Application.Features.CarAds.Queries.Mine;
     using Application.Features.CarAds.Queries.Search;
-
+    using CarRentalSystem.Application.Features.CarAds.Commands.Delete;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -49,6 +49,12 @@
         [Authorize]
         [Route(Id + PathSeparator + nameof(ChangeAvailability))]
         public async Task<ActionResult> ChangeAvailability([FromRoute] ChangeAvailabilityCommand command)
+            => await this.Send(command);
+
+        [HttpDelete]
+        [Authorize]
+        [Route(Id)]
+        public async Task<ActionResult> Delete([FromRoute] DeleteCarAdCommand command)
             => await this.Send(command);
     }
 }

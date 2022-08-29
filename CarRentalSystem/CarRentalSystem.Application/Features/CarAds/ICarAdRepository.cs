@@ -1,6 +1,7 @@
 ﻿namespace CarRentalSystem.Application.Features.CarAds
 {
     using CarAds.Common;
+    using CarRentalSystem.Application.Common;
     using Contracts;
     using Domain.Models.CarAds;
     using Domain.Models.Dealers;
@@ -39,5 +40,7 @@
             CancellationToken cancellationToken = default);
 
         Task<CarAd> Find(int id, CancellationToken cancellationToken);
+
+        Task<Result> Delete(int id, CancellationToken cancellationToken);
     }
 }

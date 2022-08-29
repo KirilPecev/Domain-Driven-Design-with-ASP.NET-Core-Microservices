@@ -1,5 +1,6 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Repositories
 {
+    using Application.Common;
     using Application.Features.CarAds;
     using Application.Features.CarAds.Common;
     using Application.Features.CarAds.Queries.Categories;
@@ -20,6 +21,22 @@
         public CarAdRepository(CarRentalDbContext db, IMapper mapper)
             : base(db)
             => this.mapper = mapper;
+
+        public async Task<Result> Delete(int id, CancellationToken cancellationToken)
+        {
+            CarAd? carAd = await this.Data.CarAds.FindAsync(id);
+
+            if (carAd == null)
+            {
+                return false;
+            }
+
+            this.Data.CarAds.Remove(carAd);
+
+            await this.Data.SaveChangesAsync(cancellationToken);
+
+            return true;
+        }
 
         public async Task<CarAd> Find(int id, CancellationToken cancellationToken)
             => await this
