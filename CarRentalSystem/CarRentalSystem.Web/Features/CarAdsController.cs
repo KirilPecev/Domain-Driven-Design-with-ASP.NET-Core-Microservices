@@ -1,6 +1,7 @@
 ﻿namespace CarRentalSystem.Web.Features
 {
     using Application.Features;
+    using Application.Features.CarAds.ChangeAvailability;
     using Application.Features.CarAds.Commands.Create;
     using Application.Features.CarAds.Commands.Edit;
     using Application.Features.CarAds.Queries.Categories;
@@ -43,5 +44,11 @@
         [Route(Id)]
         public async Task<ActionResult> Edit(int id, EditCarAdCommand command)
             => await this.Send(command.SetId(id));
+
+        [HttpPut]
+        [Authorize]
+        [Route(Id + PathSeparator + nameof(ChangeAvailability))]
+        public async Task<ActionResult> ChangeAvailability([FromRoute] ChangeAvailabilityCommand command)
+            => await this.Send(command);
     }
 }
