@@ -5,9 +5,11 @@
     using System.Text;
 
     using Application;
+    using Application.Common;
     using Application.Features.Identity;
+    using Application.Features.Identity.Commands;
     using Application.Features.Identity.Commands.LoginUser;
-    using CarRentalSystem.Application.Common;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
@@ -25,7 +27,7 @@
             this.applicationSettings = applicationSettings.Value;
         }
 
-        public async Task<Result<LoginOutputModel>> Login(UserInputModel userInput)
+        public async Task<Result<LoginSuccessModel>> Login(UserInputModel userInput)
         {
             User user = await this.userManager.FindByEmailAsync(userInput.Email);
             if (user == null)
@@ -41,7 +43,7 @@
 
             string token = this.GenerateJwtToken(user.Id, user.Email);
 
-            return new LoginOutputModel(token);
+            return new LoginSuccessModel(user.Id, token);
         }
 
         public async Task<Result<IUser>> Register(UserInputModel userInput)

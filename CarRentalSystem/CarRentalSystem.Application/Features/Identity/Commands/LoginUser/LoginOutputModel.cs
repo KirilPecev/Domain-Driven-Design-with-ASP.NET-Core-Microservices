@@ -4,6 +4,12 @@
     {
         public string Token { get; }
 
-        public LoginOutputModel(string token) => Token = token;
+        public int DealerId { get; }
+
+        public LoginOutputModel(string token, int dealerId)
+        {
+            this.Token = token;
+            this.DealerId = dealerId;
+        }
     }
 }

@@ -3,8 +3,9 @@
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Application.Common;
     using Application.Features.Dealers;
-    using CarRentalSystem.Application.Common;
+    using Commands;
     using Domain.Factories.Dealers;
     using Domain.Models.Dealers;
 
@@ -12,16 +13,9 @@
 
     public class RegisterUserCommand : UserInputModel, IRequest<Result>
     {
-        public string Name { get; }
+        public string Name { get; set; } = default!;
 
-        public string PhoneNumber { get; }
-
-        public RegisterUserCommand(string email, string password, string name, string phoneNumber)
-            : base(email, password)
-        {
-            this.Name = name;
-            this.PhoneNumber = phoneNumber;
-        }
+        public string PhoneNumber { get; set; } = default!;
 
         public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Result>
         {

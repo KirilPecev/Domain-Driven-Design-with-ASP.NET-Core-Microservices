@@ -1,12 +1,13 @@
 ﻿namespace CarRentalSystem.Application.Features.Identity
 {
-    using CarRentalSystem.Application.Common;
+    using Commands;
     using Commands.LoginUser;
+    using Common;
 
     public interface IIdentity
     {
         Task<Result<IUser>> Register(UserInputModel userInput);
 
-        Task<Result<LoginOutputModel>> Login(UserInputModel userInput);
+        Task<Result<LoginSuccessModel>> Login(UserInputModel userInput);
     }
 }
