@@ -16,6 +16,9 @@
                 .HasKey(c => c.Id);
 
             builder
+                .HasIndex(c => c.IsAvailable);
+
+            builder
                 .Property(c => c.Model)
                 .IsRequired()
                 .HasMaxLength(MaxModelLength);

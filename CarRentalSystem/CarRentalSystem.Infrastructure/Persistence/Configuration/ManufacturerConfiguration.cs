@@ -15,6 +15,10 @@
                 .HasKey(m => m.Id);
 
             builder
+                .HasIndex(c => c.Name)
+                .IsUnique();
+
+            builder
                 .Property(m => m.Name)
                 .IsRequired()
                 .HasMaxLength(MaxNameLength);

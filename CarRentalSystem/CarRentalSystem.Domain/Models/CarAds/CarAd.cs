@@ -83,7 +83,7 @@
 
         public CarAd UpdateCategory(Category category)
         {
-            //this.ValidateCategory(category);
+            this.ValidateCategory(category);
 
             this.Category = category;
 
