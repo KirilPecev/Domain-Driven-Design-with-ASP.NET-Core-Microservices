@@ -15,6 +15,7 @@
                     options => options.BindNonPublicProperties = true)
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddMediatR(Assembly.GetExecutingAssembly())
-                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>))
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
     }
 }
