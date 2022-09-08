@@ -20,12 +20,17 @@
         private const string InvalidErrorMessage = "Invalid credentials.";
 
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly ApplicationSettings applicationSettings;
 
-        public IdentityService(UserManager<User> userManager, IOptions<ApplicationSettings> applicationSettings)
+        public IdentityService(
+            UserManager<User> userManager,
+            IOptions<ApplicationSettings> applicationSettings,
+            RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.applicationSettings = applicationSettings.Value;
+            this.roleManager = roleManager;
         }
 
         public async Task<Result> ChangePassword(ChangePasswordInputModel changePasswordInputModel)
@@ -72,6 +77,7 @@
 
             IdentityResult identityResult = await this.userManager.CreateAsync(user, userInput.Password);
 
+
             IEnumerable<string> errors = identityResult.Errors.Select(e => e.Description);
 
             return identityResult.Succeeded ? Result<IUser>.SuccessWith(user) : Result<IUser>.Failure(errors);
@@ -87,7 +93,8 @@
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, userId),
-                    new Claim(ClaimTypes.Name, email)
+                    new Claim(ClaimTypes.Name, email),
+                    new Claim(ClaimTypes.Role, role)
                 }),
                 Expires = DateTime.UtcNow.AddDays(this.applicationSettings.TokenExpirationDays),
                 SigningCredentials = new SigningCredentials(
