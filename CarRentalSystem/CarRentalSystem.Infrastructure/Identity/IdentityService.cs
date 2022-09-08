@@ -20,13 +20,13 @@
         private const string InvalidErrorMessage = "Invalid credentials.";
 
         private readonly UserManager<User> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<Role> roleManager;
         private readonly ApplicationSettings applicationSettings;
 
         public IdentityService(
             UserManager<User> userManager,
             IOptions<ApplicationSettings> applicationSettings,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<Role> roleManager)
         {
             this.userManager = userManager;
             this.applicationSettings = applicationSettings.Value;
@@ -79,10 +79,10 @@
 
             IEnumerable<string> errors = identityResult.Errors.Select(e => e.Description);
 
-            if (identityResult.Succeeded)
-            {
-                this.userManager.AddToRoleAsync(user, "");
-            }
+            //if (identityResult.Succeeded)
+            //{
+            //    this.userManager.AddToRoleAsync(user, "");
+            //}
 
             return identityResult.Succeeded ? Result<IUser>.SuccessWith(user) : Result<IUser>.Failure(errors);
         }
@@ -98,7 +98,7 @@
                 {
                     new Claim(ClaimTypes.NameIdentifier, userId),
                     new Claim(ClaimTypes.Name, email),
-                    new Claim(ClaimTypes.Role, role)
+                    //new Claim(ClaimTypes.Role, role)
                 }),
                 Expires = DateTime.UtcNow.AddDays(this.applicationSettings.TokenExpirationDays),
                 SigningCredentials = new SigningCredentials(

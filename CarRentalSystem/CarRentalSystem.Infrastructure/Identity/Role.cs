@@ -6,10 +6,10 @@
     {
         public string Description { get; private set; }
 
-        public Role(string roleName, string description)
-            : base(roleName)
+        internal Role(string name, string description) : base(name)
         {
-            Description = description;
+            this.Name = name;
+            this.Description = description;
         }
     }
 }

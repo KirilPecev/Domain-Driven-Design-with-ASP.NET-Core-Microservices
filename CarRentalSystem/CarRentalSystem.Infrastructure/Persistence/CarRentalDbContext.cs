@@ -9,7 +9,7 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    internal class CarRentalDbContext : IdentityDbContext<User>
+    internal class CarRentalDbContext : IdentityDbContext<User, Role, string>
     {
         public CarRentalDbContext(DbContextOptions<CarRentalDbContext> options) : base(options) { }
 

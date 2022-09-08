@@ -20,32 +20,32 @@
             SeedUsers(userManager);
         }
 
-        private static async void SeedRoles(RoleManager<Role> roleManager)
+        private static void SeedRoles(RoleManager<Role> roleManager)
         {
             foreach (var item in roles)
             {
-                bool exists = await roleManager.RoleExistsAsync(item.Key);
+                bool exists = roleManager.RoleExistsAsync(item.Key).Result;
 
                 if (!exists)
                 {
                     Role role = new Role(item.Key, item.Value);
-                    await roleManager.CreateAsync(role);
+                    IdentityResult result = roleManager.CreateAsync(role).Result;
                 }
             }
         }
 
-        private static async void SeedUsers(UserManager<User> userManager)
+        private static void SeedUsers(UserManager<User> userManager)
         {
-            bool exists = await userManager.FindByNameAsync("user1") != null;
+            bool exists = userManager.FindByNameAsync("user1").Result != null;
             if (!exists)
             {
                 User user = new User("user1@localhost");
 
-                IdentityResult result = await userManager.CreateAsync(user, "user1@localhost123");
+                IdentityResult result = userManager.CreateAsync(user, "user1@localhost123").Result;
 
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, Administrator);
+                    IdentityResult roleResult = userManager.AddToRoleAsync(user, Administrator).Result;
                 }
             }
         }
