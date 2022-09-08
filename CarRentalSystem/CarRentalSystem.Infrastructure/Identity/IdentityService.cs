@@ -66,7 +66,9 @@
                 return InvalidErrorMessage;
             }
 
-            string token = this.GenerateJwtToken(user.Id, user.Email);
+            IList<string> roles = await this.userManager.GetRolesAsync(user);
+
+            string token = this.GenerateJwtToken(user.Id, user.Email, roles);
 
             return new LoginSuccessModel(user.Id, token);
         }
@@ -79,15 +81,15 @@
 
             IEnumerable<string> errors = identityResult.Errors.Select(e => e.Description);
 
-            //if (identityResult.Succeeded)
-            //{
-            //    this.userManager.AddToRoleAsync(user, "");
-            //}
+            if (identityResult.Succeeded)
+            {
+                await this.userManager.AddToRoleAsync(user, RoleConstants.User);
+            }
 
             return identityResult.Succeeded ? Result<IUser>.SuccessWith(user) : Result<IUser>.Failure(errors);
         }
 
-        private string GenerateJwtToken(string userId, string email)
+        private string GenerateJwtToken(string userId, string email, IList<string> roles)
         {
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             byte[] key = Encoding.ASCII.GetBytes(this.applicationSettings.Secret);
@@ -97,14 +99,18 @@
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, userId),
-                    new Claim(ClaimTypes.Name, email),
-                    //new Claim(ClaimTypes.Role, role)
+                    new Claim(ClaimTypes.Name, email)
                 }),
                 Expires = DateTime.UtcNow.AddDays(this.applicationSettings.TokenExpirationDays),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };
+
+            foreach (var role in roles)
+            {
+                tokenDescriptor.Subject.AddClaim(new(ClaimTypes.Role, role));
+            }
 
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             string encryptedToken = tokenHandler.WriteToken(token);
