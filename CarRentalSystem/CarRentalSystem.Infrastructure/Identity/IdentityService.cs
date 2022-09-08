@@ -77,8 +77,12 @@
 
             IdentityResult identityResult = await this.userManager.CreateAsync(user, userInput.Password);
 
-
             IEnumerable<string> errors = identityResult.Errors.Select(e => e.Description);
+
+            if (identityResult.Succeeded)
+            {
+                this.userManager.AddToRoleAsync(user, "");
+            }
 
             return identityResult.Succeeded ? Result<IUser>.SuccessWith(user) : Result<IUser>.Failure(errors);
         }
