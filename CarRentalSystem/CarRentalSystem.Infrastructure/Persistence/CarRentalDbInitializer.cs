@@ -1,20 +1,32 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence
 {
     using System.Reflection;
+
+    using CarRentalSystem.Infrastructure.Identity;
+    using CarRentalSystem.Infrastructure.Identity.Seeders;
+
     using Domain.Common;
+
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     internal class CarRentalDbInitializer : IInitializer
     {
         private readonly CarRentalDbContext db;
         private readonly IEnumerable<IInitialData> initialDataProviders;
+        private readonly UserManager<User> userManager;
+        private readonly RoleManager<Role> roleManager;
 
         public CarRentalDbInitializer(
            CarRentalDbContext db,
-           IEnumerable<IInitialData> initialDataProviders)
+           IEnumerable<IInitialData> initialDataProviders,
+           UserManager<User> userManager,
+           RoleManager<Role> roleManager)
         {
             this.db = db;
             this.initialDataProviders = initialDataProviders;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public void Initialize()
@@ -33,6 +45,8 @@
                     }
                 }
             }
+
+            IdentityUserSeeder.SeedData(this.userManager, this.roleManager);
 
             this.db.SaveChanges();
         }
