@@ -20,17 +20,14 @@
         private const string InvalidErrorMessage = "Invalid credentials.";
 
         private readonly UserManager<User> userManager;
-        private readonly RoleManager<Role> roleManager;
         private readonly ApplicationSettings applicationSettings;
 
         public IdentityService(
             UserManager<User> userManager,
-            IOptions<ApplicationSettings> applicationSettings,
-            RoleManager<Role> roleManager)
+            IOptions<ApplicationSettings> applicationSettings)
         {
             this.userManager = userManager;
             this.applicationSettings = applicationSettings.Value;
-            this.roleManager = roleManager;
         }
 
         public async Task<Result> ChangePassword(ChangePasswordInputModel changePasswordInputModel)
