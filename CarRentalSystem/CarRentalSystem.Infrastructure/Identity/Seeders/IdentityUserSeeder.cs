@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity;
 
-    using static RoleConstants;
+    using static Roles;
 
     internal static class IdentityUserSeeder
     {

@@ -80,7 +80,7 @@
 
             if (identityResult.Succeeded)
             {
-                await this.userManager.AddToRoleAsync(user, RoleConstants.User);
+                await this.userManager.AddToRoleAsync(user, Roles.User);
             }
 
             return identityResult.Succeeded ? Result<IUser>.SuccessWith(user) : Result<IUser>.Failure(errors);
