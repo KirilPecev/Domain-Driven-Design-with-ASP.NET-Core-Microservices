@@ -29,7 +29,7 @@
                 if (!exists)
                 {
                     Role role = new Role(item.Key, item.Value);
-                    IdentityResult result = roleManager.CreateAsync(role).Result;
+                    _ = roleManager.CreateAsync(role).Result;
                 }
             }
         }
@@ -45,7 +45,8 @@
 
                 if (result.Succeeded)
                 {
-                    IdentityResult roleResult = userManager.AddToRoleAsync(user, Administrator).Result;
+                    _ = userManager.AddToRoleAsync(user, Administrator).Result;
+                    _ = userManager.AddToRoleAsync(user, User).Result;
                 }
             }
         }
