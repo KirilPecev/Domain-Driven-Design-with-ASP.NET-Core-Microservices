@@ -1,6 +1,6 @@
 ﻿namespace CarRentalSystem.Application.Features.Identity.Commands.LoginUser
 {
-    using Common;
+    using Application.Common;
     using Features.Dealers;
     using Features.Identity;
 

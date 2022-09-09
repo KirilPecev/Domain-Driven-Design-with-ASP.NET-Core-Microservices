@@ -1,6 +1,6 @@
 ﻿namespace CarRentalSystem.Application.Features.Identity.Commands.ChangePassword
 {
-    using Common;
+    using Application.Common;
     using Contracts;
 
     using MediatR;

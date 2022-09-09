@@ -10,6 +10,8 @@
     using Application.Features.CarAds.Queries.Mine;
     using Application.Features.CarAds.Queries.Search;
 
+    using CarRentalSystem.Application.Features.Identity.Common;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +22,7 @@
             => await this.Send(query);
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = $"{UserRoles.Administrator},{UserRoles.User}")]
         public async Task<ActionResult<CreateCarAdOutputModel>> Create(CreateCarAdCommand command)
             => await this.Send(command);
 
@@ -30,7 +32,7 @@
             => await this.Send(query);
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = $"{UserRoles.Administrator},{UserRoles.User}")]
         [Route(nameof(Mine))]
         public async Task<ActionResult<MineCarAdsOutputModel>> Mine([FromQuery] MineCarAdsQuery query)
             => await this.Send(query);
@@ -41,19 +43,19 @@
             => await this.Send(query);
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = $"{UserRoles.Administrator},{UserRoles.User}")]
         [Route(Id)]
         public async Task<ActionResult> Edit(int id, EditCarAdCommand command)
             => await this.Send(command.SetId(id));
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = $"{UserRoles.Administrator},{UserRoles.User}")]
         [Route(Id + PathSeparator + nameof(ChangeAvailability))]
         public async Task<ActionResult> ChangeAvailability([FromRoute] ChangeAvailabilityCommand command)
             => await this.Send(command);
 
         [HttpDelete]
-        [Authorize]
+        [Authorize(Roles = $"{UserRoles.Administrator},{UserRoles.User}")]
         [Route(Id)]
         public async Task<ActionResult> Delete([FromRoute] DeleteCarAdCommand command)
             => await this.Send(command);

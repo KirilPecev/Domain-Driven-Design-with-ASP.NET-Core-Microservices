@@ -3,6 +3,7 @@
     using Application.Features.Identity.Commands.ChangePassword;
     using Application.Features.Identity.Commands.LoginUser;
     using Application.Features.Identity.Commands.RegisterUser;
+    using Application.Features.Identity.Common;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@
             => await this.Send(command);
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = $"{UserRoles.Administrator},{UserRoles.User}")]
         [Route(nameof(ChangePassword))]
         public async Task<ActionResult> ChangePassword(ChangePasswordCommand command)
            => await this.Send(command);

@@ -10,6 +10,7 @@
     using Application.Features.Identity.Commands;
     using Application.Features.Identity.Commands.ChangePassword;
     using Application.Features.Identity.Commands.LoginUser;
+    using Application.Features.Identity.Common;
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Options;
@@ -80,7 +81,7 @@
 
             if (identityResult.Succeeded)
             {
-                await this.userManager.AddToRoleAsync(user, Roles.User);
+                await this.userManager.AddToRoleAsync(user, UserRoles.User);
             }
 
             return identityResult.Succeeded ? Result<IUser>.SuccessWith(user) : Result<IUser>.Failure(errors);
