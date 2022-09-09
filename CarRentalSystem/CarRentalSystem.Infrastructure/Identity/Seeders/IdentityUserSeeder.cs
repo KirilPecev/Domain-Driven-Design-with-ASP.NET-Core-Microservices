@@ -8,8 +8,8 @@
     {
         private static Dictionary<string, string> roles = new()
         {
-            {User, UserDescription },
-            {Administrator, AdministratorDescription}
+            { User, UserDescription },
+            { Administrator, AdministratorDescription }
         };
 
         public static void SeedData(
