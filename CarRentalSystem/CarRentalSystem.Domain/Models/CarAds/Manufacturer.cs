@@ -5,7 +5,7 @@
 
     using static ModelConstants.Manufacturer;
 
-    public class Manufacturer : Entity<int>
+    public class Manufacturer : Entity<int>, IAuditable
     {
         public string Name { get; private set; }
 

@@ -2,6 +2,7 @@
 {
     using System.Reflection;
 
+    using Domain.Models.Auditable;
     using Domain.Models.CarAds;
     using Domain.Models.Dealers;
     using Identity;
@@ -20,6 +21,8 @@
         public DbSet<Manufacturer> Manufacturers { get; set; } = default!;
 
         public DbSet<Dealer> Dealers { get; set; } = default!;
+
+        public DbSet<AuditEntry> AuditEntries { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

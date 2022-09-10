@@ -5,7 +5,7 @@
 
     using static ModelConstants.Category;
 
-    public class Category : Entity<int>
+    public class Category : Entity<int>, IAuditable
     {
         public string Name { get; }
 

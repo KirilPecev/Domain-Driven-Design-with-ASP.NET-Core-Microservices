@@ -6,7 +6,7 @@
     using static ModelConstants.CarAd;
     using static ModelConstants.Common;
 
-    public class CarAd : Entity<int>, IAggregateRoot
+    public class CarAd : Entity<int>, IAggregateRoot, IAuditable
     {
         private static readonly IEnumerable<Category> AllowedCategories
             = new CategoryData().GetData().Cast<Category>();

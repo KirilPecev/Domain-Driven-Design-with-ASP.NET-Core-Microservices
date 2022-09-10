@@ -6,7 +6,7 @@
 
     using static ModelConstants.Dealer;
 
-    public class Dealer : Entity<int>, IAggregateRoot
+    public class Dealer : Entity<int>, IAggregateRoot, IAuditable
     {
         private readonly HashSet<CarAd> carAds;
 
