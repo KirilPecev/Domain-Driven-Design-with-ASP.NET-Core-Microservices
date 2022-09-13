@@ -24,8 +24,8 @@
             ValidationContext<TRequest> context = new ValidationContext<TRequest>(request);
 
             List<ValidationFailure> errors = this.validators
-                .Select(v => v.Validate(context))
-                .SelectMany(r => r.Errors)
+                .Select(v => v.ValidateAsync(context))
+                .SelectMany(r => r.Result.Errors)
                 .Where(f => f != null)
                 .ToList();
 

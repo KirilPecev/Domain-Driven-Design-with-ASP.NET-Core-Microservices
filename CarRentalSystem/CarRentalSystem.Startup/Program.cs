@@ -39,6 +39,7 @@ app.UseCors(builder =>
     .AllowAnyHeader();
 });
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
