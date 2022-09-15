@@ -1,13 +1,19 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Repositories
 {
+    using System.Linq;
+
     using Application.Common;
+    using Application.Contracts;
     using Application.Features.CarAds;
     using Application.Features.CarAds.Common;
     using Application.Features.CarAds.Queries.Categories;
     using Application.Features.CarAds.Queries.Details;
     using Application.Features.CarAds.Queries.Search;
+
     using AutoMapper;
+
     using Common;
+
     using Domain.Models.CarAds;
     using Domain.Models.Dealers;
     using Domain.Specifications;
@@ -17,10 +23,15 @@
     internal class CarAdRepository : DataRepository<CarAd>, ICarAdRepository
     {
         private readonly IMapper mapper;
+        private readonly ICacheService cacheService;
+        private readonly string cacheKey = $"{typeof(CarAd)}";
 
-        public CarAdRepository(CarRentalDbContext db, IMapper mapper)
+        public CarAdRepository(CarRentalDbContext db, IMapper mapper, ICacheService cacheService)
             : base(db)
-            => this.mapper = mapper;
+        {
+            this.mapper = mapper;
+            this.cacheService = cacheService;
+        }
 
         public async Task<Result> Delete(int id, CancellationToken cancellationToken)
         {
@@ -128,11 +139,23 @@
         private IQueryable<CarAd> GetCarAdsQuery(
             Specification<CarAd> carAdSpecification,
             Specification<Dealer> dealerSpecification)
-            => this
-                .Data
-                .Dealers
+        {
+            bool hasValue = this.cacheService.TryGet(this.cacheKey, out IReadOnlyList<Dealer> cachedDealers);
+            if (!hasValue)
+            {
+                List<Dealer> dealers = this.Data
+                    .Dealers
+                    .Include(d => d.CarAds)
+                    .ToList();
+
+                this.cacheService.Set(this.cacheKey, dealers);
+            }
+
+            return cachedDealers
+                .AsQueryable()
                 .Where(dealerSpecification)
                 .SelectMany(d => d.CarAds)
                 .Where(carAdSpecification);
+        }
     }
 }

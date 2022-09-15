@@ -4,11 +4,13 @@
 
     using Application;
     using Application.Contracts;
+
     using CarRentalSystem.Application.Features.Identity;
+    using CarRentalSystem.Infrastructure.Configuration;
+
     using Identity;
 
     using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -18,11 +20,14 @@
 
     public static class InfrastructureConfiguration
     {
+        private const string CacheConfiguration = "CacheConfiguration";
+
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
             => services
                 .AddDatabase(configuration)
                 .AddRepositories()
-                .AddIdentity(configuration);
+                .AddIdentity(configuration)
+                .AddCache(configuration);
 
         private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
             => services
@@ -85,5 +90,11 @@
 
             return services;
         }
+
+        private static IServiceCollection AddCache(this IServiceCollection services, IConfiguration configuration)
+            => services
+                .Configure<CacheConfiguration>(configuration.GetSection(CacheConfiguration))
+                .AddMemoryCache()
+                .AddTransient<MemoryCacheService>();
     }
 }
