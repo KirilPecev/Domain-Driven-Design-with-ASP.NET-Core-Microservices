@@ -143,12 +143,12 @@
             bool hasValue = this.cacheService.TryGet(this.cacheKey, out IReadOnlyList<Dealer> cachedDealers);
             if (!hasValue)
             {
-                List<Dealer> dealers = this.Data
+                cachedDealers = this.Data
                     .Dealers
                     .Include(d => d.CarAds)
                     .ToList();
 
-                this.cacheService.Set(this.cacheKey, dealers);
+                this.cacheService.Set(this.cacheKey, cachedDealers);
             }
 
             return cachedDealers
