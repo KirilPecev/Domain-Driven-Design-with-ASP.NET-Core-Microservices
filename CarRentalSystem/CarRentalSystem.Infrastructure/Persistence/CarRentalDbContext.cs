@@ -8,6 +8,7 @@
     using Domain.Common;
     using Domain.Models.CarAds;
     using Domain.Models.Dealers;
+    using Domain.Models.Statistics;
     using Identity;
 
     using Microsoft.AspNetCore.Http;
@@ -35,6 +36,10 @@
         public DbSet<Dealer> Dealers { get; set; } = default!;
 
         public DbSet<AuditEntry> AuditEntries { get; set; } = default!;
+
+        public DbSet<Statistic> Statistics { get; set; } = default!;
+
+        public DbSet<CarAdView> CarAdViews { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

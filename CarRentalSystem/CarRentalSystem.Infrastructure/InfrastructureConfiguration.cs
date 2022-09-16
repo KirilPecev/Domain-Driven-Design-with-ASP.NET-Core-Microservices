@@ -95,6 +95,6 @@
             => services
                 .Configure<CacheConfiguration>(configuration.GetSection(CacheConfiguration))
                 .AddMemoryCache()
-                .AddTransient<MemoryCacheService>();
+                .AddTransient<ICacheService, MemoryCacheService>();
     }
 }

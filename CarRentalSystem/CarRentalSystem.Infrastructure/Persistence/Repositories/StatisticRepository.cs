@@ -1,0 +1,48 @@
+﻿namespace CarRentalSystem.Infrastructure.Persistence.Repositories
+{
+    using System.Threading;
+    using Application.Common;
+    using Application.Contracts;
+    using Application.Features.Statistics;
+    using Application.Features.Statistics.Queries.Current;
+    using AutoMapper;
+    using Domain.Models.Statistics;
+    using Microsoft.EntityFrameworkCore;
+
+    internal class StatisticRepository : DataRepository<Statistic>, IStatisticRepository
+    {
+        private readonly IMapper mapper;
+        private readonly ICacheService cacheService;
+        private readonly string cacheKey = $"{typeof(Statistic)}";
+
+        public StatisticRepository(CarRentalDbContext db, IMapper mapper, ICacheService cacheService)
+            : base(db)
+        {
+            this.mapper = mapper;
+            this.cacheService = cacheService;
+        }
+
+        public async Task<int> GetCarAdViews(int carAdId, CancellationToken cancellationToken)
+            => await this.Data
+                .CarAdViews
+                .CountAsync(cav => cav.CarAdId == carAdId, cancellationToken);
+
+        public async Task<GetCurrentStatisticsOutputModel> GetCurrent(CancellationToken cancellationToken)
+            => await this.mapper
+                .ProjectTo<GetCurrentStatisticsOutputModel>(this.All())
+                .SingleOrDefaultAsync(cancellationToken);
+
+        public async Task<Result> IncrementCarAds(CancellationToken cancellationToken)
+        {
+            Statistic? statistics = await this.Data
+                .Statistics
+                .SingleOrDefaultAsync(cancellationToken);
+
+            statistics.AddCarAd();
+
+            await this.Save(statistics, cancellationToken);
+
+            return true;
+        }
+    }
+}
