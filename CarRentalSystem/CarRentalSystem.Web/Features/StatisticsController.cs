@@ -12,6 +12,7 @@
             => await this.Send(query);
 
         [HttpGet]
+        [Route(nameof(Details))]
         public async Task<ActionResult<GetCurrentStatisticsOutputModel>> Details([FromQuery] GetCurrentStatisticsQuery query)
            => await this.Send(query);
     }
