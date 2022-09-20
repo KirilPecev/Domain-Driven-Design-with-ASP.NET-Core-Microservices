@@ -3,9 +3,8 @@
     using Application.Common;
     using Commands.Common;
     using Contracts;
-    using Dealers;
     using Domain.Models.CarAds;
-
+    using Domain.Repositories;
     using MediatR;
 
     public class ChangeAvailabilityCommand : EntityCommand<int>, IRequest<Result>
@@ -13,13 +12,13 @@
         public class ChangeAvailabilityCommandHandler : IRequestHandler<ChangeAvailabilityCommand, Result>
         {
             private readonly ICurrentUser currentUser;
-            private readonly ICarAdRepository carAdRepository;
-            private readonly IDealerRepository dealerRepository;
+            private readonly ICarAdDomainRepository carAdRepository;
+            private readonly IDealerDomainRepository dealerRepository;
 
             public ChangeAvailabilityCommandHandler(
                 ICurrentUser currentUser,
-                ICarAdRepository carAdRepository,
-                IDealerRepository dealerRepository)
+                ICarAdDomainRepository carAdRepository,
+                IDealerDomainRepository dealerRepository)
             {
                 this.currentUser = currentUser;
                 this.carAdRepository = carAdRepository;

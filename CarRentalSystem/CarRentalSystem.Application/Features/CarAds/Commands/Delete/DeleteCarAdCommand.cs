@@ -1,9 +1,10 @@
 ﻿namespace CarRentalSystem.Application.Features.CarAds.Commands.Delete
 {
     using Application.Common;
+
+    using Common;
     using Contracts;
-    using Features.CarAds.Commands.Common;
-    using Features.Dealers;
+    using Domain.Repositories;
 
     using MediatR;
 
@@ -12,13 +13,13 @@
         public class DeleteCarAdCommandHandler : IRequestHandler<DeleteCarAdCommand, Result>
         {
             private readonly ICurrentUser currentUser;
-            private readonly ICarAdRepository carAdRepository;
-            private readonly IDealerRepository dealerRepository;
+            private readonly ICarAdDomainRepository carAdRepository;
+            private readonly IDealerDomainRepository dealerRepository;
 
             public DeleteCarAdCommandHandler(
                 ICurrentUser currentUser,
-                ICarAdRepository carAdRepository,
-                IDealerRepository dealerRepository)
+                ICarAdDomainRepository carAdRepository,
+                IDealerDomainRepository dealerRepository)
             {
                 this.currentUser = currentUser;
                 this.carAdRepository = carAdRepository;

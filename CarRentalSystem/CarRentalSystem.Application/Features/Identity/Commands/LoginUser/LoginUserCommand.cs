@@ -1,7 +1,7 @@
 ﻿namespace CarRentalSystem.Application.Features.Identity.Commands.LoginUser
 {
     using Application.Common;
-    using Features.Dealers;
+    using Domain.Repositories;
     using Features.Identity;
 
     using MediatR;
@@ -11,11 +11,11 @@
         public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, Result<LoginOutputModel>>
         {
             private readonly IIdentity identity;
-            private readonly IDealerRepository dealerRepository;
+            private readonly IDealerDomainRepository dealerRepository;
 
             public LoginUserCommandHandler(
                 IIdentity identity,
-                IDealerRepository dealerRepository)
+                IDealerDomainRepository dealerRepository)
             {
                 this.identity = identity;
                 this.dealerRepository = dealerRepository;

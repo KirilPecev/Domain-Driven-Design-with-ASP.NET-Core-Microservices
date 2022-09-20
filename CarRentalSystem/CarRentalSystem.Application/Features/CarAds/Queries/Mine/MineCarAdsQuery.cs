@@ -5,7 +5,7 @@
 
     using Common;
     using Contracts;
-    using Dealers;
+    using Domain.Repositories;
 
     using MediatR;
 
@@ -13,12 +13,12 @@
     {
         public class MineCarAdsQueryHandler : CarAdsQueryHandler, IRequestHandler<MineCarAdsQuery, MineCarAdsOutputModel>
         {
-            private readonly IDealerRepository dealerRepository;
+            private readonly IDealerDomainRepository dealerRepository;
             private readonly ICurrentUser currentUser;
 
             public MineCarAdsQueryHandler(
-                ICarAdRepository carAdRepository,
-                IDealerRepository dealerRepository,
+                ICarAdQueryRepository carAdRepository,
+                IDealerDomainRepository dealerRepository,
                 ICurrentUser currentUser) : base(carAdRepository)
             {
                 this.dealerRepository = dealerRepository;

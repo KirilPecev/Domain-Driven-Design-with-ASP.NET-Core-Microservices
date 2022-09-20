@@ -2,13 +2,11 @@
 {
     using System.Linq;
 
-    using Application.Common;
     using Application.Contracts;
     using Application.Features.CarAds;
     using Application.Features.CarAds.Common;
     using Application.Features.CarAds.Queries.Categories;
     using Application.Features.CarAds.Queries.Details;
-    using Application.Features.CarAds.Queries.Search;
 
     using AutoMapper;
 
@@ -16,11 +14,12 @@
 
     using Domain.Models.CarAds;
     using Domain.Models.Dealers;
+    using Domain.Repositories;
     using Domain.Specifications;
 
     using Microsoft.EntityFrameworkCore;
 
-    internal class CarAdRepository : DataRepository<CarAd>, ICarAdRepository
+    internal class CarAdRepository : DataRepository<CarAd>, ICarAdDomainRepository, ICarAdQueryRepository
     {
         private readonly IMapper mapper;
         private readonly ICacheService cacheService;
@@ -33,7 +32,7 @@
             this.cacheService = cacheService;
         }
 
-        public async Task<Result> Delete(int id, CancellationToken cancellationToken)
+        public async Task<bool> Delete(int id, CancellationToken cancellationToken)
         {
             CarAd? carAd = await this.Data.CarAds.FindAsync(id);
 
@@ -75,15 +74,6 @@
             return categories.Values;
         }
 
-        public async Task<IEnumerable<CarAdListingModel>> GetCarAdListings(
-            Specification<CarAd> specification,
-            CancellationToken cancellationToken = default)
-            => await this.mapper
-                .ProjectTo<CarAdListingModel>(this
-                    .AllAvailable()
-                    .Where(specification))
-                .ToListAsync(cancellationToken);
-
         public async Task<IEnumerable<TOutputModel>> GetCarAdListings<TOutputModel>(
             Specification<CarAd> carAdSpecification,
             Specification<Dealer> dealerSpecification,
@@ -117,11 +107,6 @@
                 .Data
                 .Manufacturers
                 .FirstOrDefaultAsync(m => m.Name == manufacturer, cancellationToken);
-
-        public async Task<int> Total(CancellationToken cancellationToken = default)
-            => await this
-                .AllAvailable()
-                .CountAsync(cancellationToken);
 
         public async Task<int> Total(
             Specification<CarAd> carAdSpecification,

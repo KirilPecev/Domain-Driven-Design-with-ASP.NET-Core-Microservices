@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using Application.Contracts;
+
     using Domain.Common;
 
     internal abstract class DataRepository<TEnitity> : IRepository<TEnitity>

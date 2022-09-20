@@ -2,15 +2,16 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
+
     using MediatR;
 
     public class GetCarAdCategoriesQuery : IRequest<IEnumerable<GetCarAdCategoryOutputModel>>
     {
         public class GetCarAdCategoriesQueryHandler : IRequestHandler<GetCarAdCategoriesQuery, IEnumerable<GetCarAdCategoryOutputModel>>
         {
-            private readonly ICarAdRepository carAdRepository;
+            private readonly ICarAdQueryRepository carAdRepository;
 
-            public GetCarAdCategoriesQueryHandler(ICarAdRepository carAdRepository)
+            public GetCarAdCategoriesQueryHandler(ICarAdQueryRepository carAdRepository)
                 => this.carAdRepository = carAdRepository;
 
             public async Task<IEnumerable<GetCarAdCategoryOutputModel>> Handle(

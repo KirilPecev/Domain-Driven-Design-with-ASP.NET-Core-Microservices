@@ -2,9 +2,12 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using CarRentalSystem.Application.Common;
+
+    using Common;
     using Contracts;
+
     using Domain.Models.Dealers;
+    using Domain.Repositories;
 
     using MediatR;
 
@@ -17,9 +20,9 @@
         public class EditDealerCommandHandler : IRequestHandler<EditDealerCommand, Result>
         {
             private readonly ICurrentUser currentUser;
-            private readonly IDealerRepository dealerRepository;
+            private readonly IDealerDomainRepository dealerRepository;
 
-            public EditDealerCommandHandler(IDealerRepository dealerRepository, ICurrentUser currentUser)
+            public EditDealerCommandHandler(IDealerDomainRepository dealerRepository, ICurrentUser currentUser)
             {
                 this.dealerRepository = dealerRepository;
                 this.currentUser = currentUser;

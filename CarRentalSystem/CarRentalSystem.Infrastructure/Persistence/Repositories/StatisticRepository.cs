@@ -1,15 +1,19 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Repositories
 {
     using System.Threading;
-    using Application.Common;
+
     using Application.Contracts;
     using Application.Features.Statistics;
     using Application.Features.Statistics.Queries.Current;
+
     using AutoMapper;
+
     using Domain.Models.Statistics;
+    using Domain.Repositories;
+
     using Microsoft.EntityFrameworkCore;
 
-    internal class StatisticRepository : DataRepository<Statistic>, IStatisticRepository
+    internal class StatisticRepository : DataRepository<Statistic>, IStatisticsDomainRepository, IStatisticsQueryRepository
     {
         private readonly IMapper mapper;
         private readonly ICacheService cacheService;
@@ -32,7 +36,7 @@
                 .ProjectTo<GetCurrentStatisticsOutputModel>(this.All())
                 .SingleOrDefaultAsync(cancellationToken);
 
-        public async Task<Result> IncrementCarAds(CancellationToken cancellationToken)
+        public async Task<bool> IncrementCarAds(CancellationToken cancellationToken)
         {
             Statistic? statistics = await this.Data
                 .Statistics

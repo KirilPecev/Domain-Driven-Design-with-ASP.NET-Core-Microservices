@@ -1,11 +1,16 @@
 ﻿namespace CarRentalSystem.Infrastructure
 {
     using System.Reflection;
-    using Application.Features.CarAds;
+
+    using Domain.Repositories;
+
     using FluentAssertions;
+
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
+
     using Persistence;
+
     using Xunit;
 
     public class InfrastructureConfigurationSpecs
@@ -26,7 +31,7 @@
 
             // Assert
             services
-                .GetService<ICarAdRepository>()
+                .GetService<ICarAdDomainRepository>()
                 .Should()
                 .NotBeNull();
         }

@@ -6,9 +6,9 @@
     {
         public class GetCurrentStatisticsQueryHandler : IRequestHandler<GetCurrentStatisticsQuery, GetCurrentStatisticsOutputModel>
         {
-            private readonly IStatisticRepository statistics;
+            private readonly IStatisticsQueryRepository statistics;
 
-            public GetCurrentStatisticsQueryHandler(IStatisticRepository statistics)
+            public GetCurrentStatisticsQueryHandler(IStatisticsQueryRepository statistics)
                 => this.statistics = statistics;
 
             public async Task<GetCurrentStatisticsOutputModel> Handle(

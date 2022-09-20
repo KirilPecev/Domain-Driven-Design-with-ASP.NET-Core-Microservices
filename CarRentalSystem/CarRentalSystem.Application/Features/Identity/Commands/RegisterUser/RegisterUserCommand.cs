@@ -4,10 +4,11 @@
     using System.Threading.Tasks;
 
     using Application.Common;
-    using Application.Features.Dealers;
     using Commands;
+
     using Domain.Factories.Dealers;
     using Domain.Models.Dealers;
+    using Domain.Repositories;
 
     using MediatR;
 
@@ -21,12 +22,12 @@
         {
             private readonly IIdentity identity;
             private readonly IDealerFactory dealerFactory;
-            private readonly IDealerRepository dealerRepository;
+            private readonly IDealerDomainRepository dealerRepository;
 
             public RegisterUserCommandHandler(
                 IIdentity identity,
                 IDealerFactory dealerFactory,
-                IDealerRepository dealerRepository)
+                IDealerDomainRepository dealerRepository)
             {
                 this.identity = identity;
                 this.dealerFactory = dealerFactory;

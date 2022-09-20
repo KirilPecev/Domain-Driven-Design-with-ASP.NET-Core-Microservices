@@ -4,9 +4,11 @@
 
     using Application;
     using Application.Contracts;
+    using Application.Features.Identity;
 
-    using CarRentalSystem.Application.Features.Identity;
-    using CarRentalSystem.Infrastructure.Configuration;
+    using Configuration;
+
+    using Domain.Common;
 
     using Identity;
 
@@ -43,7 +45,8 @@
                .Scan(scan => scan
                    .FromCallingAssembly()
                    .AddClasses(classes => classes
-                       .AssignableTo(typeof(IRepository<>)))
+                       .AssignableTo(typeof(IDomainRepository<>))
+                       .AssignableTo(typeof(IQueryRepository<>)))
                    .AsMatchingInterface()
                    .WithTransientLifetime());
 

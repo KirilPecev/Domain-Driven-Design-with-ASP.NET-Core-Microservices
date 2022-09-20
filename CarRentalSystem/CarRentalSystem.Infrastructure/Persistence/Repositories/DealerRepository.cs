@@ -12,12 +12,13 @@
 
     using Domain.Exceptions;
     using Domain.Models.Dealers;
+    using Domain.Repositories;
 
     using Identity;
 
     using Microsoft.EntityFrameworkCore;
 
-    internal class DealerRepository : DataRepository<Dealer>, IDealerRepository
+    internal class DealerRepository : DataRepository<Dealer>, IDealerDomainRepository, IDealerQueryRepository
     {
         private readonly IMapper mapper;
 

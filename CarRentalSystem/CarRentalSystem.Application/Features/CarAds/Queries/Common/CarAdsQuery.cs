@@ -1,6 +1,7 @@
 ﻿namespace CarRentalSystem.Application.Features.CarAds.Queries.Common
 {
     using CarAds.Common;
+
     using Domain.Models.CarAds;
     using Domain.Models.Dealers;
     using Domain.Specifications;
@@ -29,9 +30,9 @@
 
         public abstract class CarAdsQueryHandler
         {
-            private readonly ICarAdRepository carAdRepository;
+            private readonly ICarAdQueryRepository carAdRepository;
 
-            protected CarAdsQueryHandler(ICarAdRepository carAdRepository)
+            protected CarAdsQueryHandler(ICarAdQueryRepository carAdRepository)
                 => this.carAdRepository = carAdRepository;
 
             protected async Task<IEnumerable<TOutputModel>> GetCarAdListings<TOutputModel>(
