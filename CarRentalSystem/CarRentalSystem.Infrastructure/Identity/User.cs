@@ -1,12 +1,9 @@
 ﻿namespace CarRentalSystem.Infrastructure.Identity
 {
-    using Application.Features.Identity;
+    using Application.Identity;
 
-    using CarRentalSystem.Application.Identity;
-    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
-
-    using Domain.Exceptions;
-    using Domain.Models.Dealers;
+    using Domain.Dealerships.Exceptions;
+    using Domain.Dealerships.Models.Dealers;
 
     using Microsoft.AspNetCore.Identity;
 

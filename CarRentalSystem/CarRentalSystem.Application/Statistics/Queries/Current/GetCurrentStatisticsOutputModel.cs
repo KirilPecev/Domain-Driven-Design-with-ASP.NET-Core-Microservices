@@ -2,11 +2,9 @@
 {
     using AutoMapper;
 
-    using CarRentalSystem.Domain.Statistics.Models.Statistics;
-
     using Common.Mapper;
 
-    using Domain.Models.Statistics;
+    using Domain.Statistics.Models.Statistics;
 
     public class GetCurrentStatisticsOutputModel : IMapFrom<Statistic>
     {

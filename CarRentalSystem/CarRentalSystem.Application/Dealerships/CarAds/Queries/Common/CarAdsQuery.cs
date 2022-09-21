@@ -1,14 +1,10 @@
 ﻿namespace CarRentalSystem.Application.Dealerships.CarAds.Queries.Common
 {
-    using CarRentalSystem.Domain.Common;
-    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
-    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
-
-    using Domain.Models.CarAds;
-    using Domain.Models.Dealers;
-    using Domain.Specifications;
-    using Domain.Specifications.CarAds;
-    using Domain.Specifications.Dealer;
+    using Domain.Common;
+    using Domain.Dealerships.Models.CarAds;
+    using Domain.Dealerships.Models.Dealers;
+    using Domain.Dealerships.Specifications.CarAds;
+    using Domain.Dealerships.Specifications.Dealer;
 
     public abstract class CarAdsQuery
     {

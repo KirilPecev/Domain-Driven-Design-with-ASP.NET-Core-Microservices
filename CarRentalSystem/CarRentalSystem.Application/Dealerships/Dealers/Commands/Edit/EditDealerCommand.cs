@@ -6,11 +6,8 @@
     using Application.Common;
     using Application.Common.Contracts;
 
-    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
-    using CarRentalSystem.Domain.Dealerships.Repositories;
-
-    using Domain.Models.Dealers;
-    using Domain.Repositories;
+    using Domain.Dealerships.Models.Dealers;
+    using Domain.Dealerships.Repositories;
 
     using MediatR;
 

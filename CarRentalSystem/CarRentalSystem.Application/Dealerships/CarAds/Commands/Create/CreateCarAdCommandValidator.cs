@@ -1,9 +1,8 @@
 ﻿namespace CarRentalSystem.Application.Dealerships.CarAds.Commands.Create
 {
-    using CarRentalSystem.Domain.Dealerships.Repositories;
     using Common;
 
-    using Domain.Repositories;
+    using Domain.Dealerships.Repositories;
 
     using FluentValidation;
 

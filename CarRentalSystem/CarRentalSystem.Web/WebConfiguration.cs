@@ -1,7 +1,6 @@
 ﻿namespace CarRentalSystem.Web
 {
     using Application.Common;
-    using Application.Contracts;
 
     using CarRentalSystem.Application.Common.Contracts;
 

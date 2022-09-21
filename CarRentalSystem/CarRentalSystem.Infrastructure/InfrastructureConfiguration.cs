@@ -2,15 +2,12 @@
 {
     using System.Text;
 
-    using Application;
-    using Application.Contracts;
-    using Application.Features.Identity;
+    using Application.Common;
+    using Application.Common.Contracts;
+    using Application.Identity;
 
-    using CarRentalSystem.Application.Common;
-    using CarRentalSystem.Application.Common.Contracts;
-    using CarRentalSystem.Application.Identity;
-
-    using Configuration;
+    using Common;
+    using Common.Persistence;
 
     using Domain.Common;
 
@@ -21,8 +18,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
-
-    using Persistence;
 
     public static class InfrastructureConfiguration
     {
@@ -100,7 +95,7 @@
 
         private static IServiceCollection AddCache(this IServiceCollection services, IConfiguration configuration)
             => services
-                .Configure<CacheConfiguration>(configuration.GetSection(CacheConfiguration))
+                .Configure<CacheSettings>(configuration.GetSection(CacheConfiguration))
                 .AddMemoryCache()
                 .AddTransient<ICacheService, MemoryCacheService>();
     }

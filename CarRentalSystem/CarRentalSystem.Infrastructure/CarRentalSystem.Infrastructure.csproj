@@ -33,10 +33,6 @@
 	
   <ItemGroup>
     <ProjectReference Include="..\CarRentalSystem.Application\CarRentalSystem.Application.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Persistence\Migrations\" />
   </ItemGroup>    
 
 </Project>

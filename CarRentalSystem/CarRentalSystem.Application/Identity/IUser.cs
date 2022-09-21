@@ -1,8 +1,6 @@
 ﻿namespace CarRentalSystem.Application.Identity
 {
-    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
-
-    using Domain.Models.Dealers;
+    using Domain.Dealerships.Models.Dealers;
 
     public interface IUser
     {

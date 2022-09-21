@@ -2,8 +2,8 @@
 {
     using Application.Common;
     using Application.Common.Contracts;
-    using CarRentalSystem.Domain.Dealerships.Repositories;
-    using Domain.Repositories;
+
+    using Domain.Dealerships.Repositories;
 
     internal static class ChangeCarAdCommandExtensions
     {

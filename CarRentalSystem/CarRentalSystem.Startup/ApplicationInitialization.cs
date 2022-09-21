@@ -1,5 +1,6 @@
 ﻿namespace CarRentalSystem.Startup
 {
+    using CarRentalSystem.Infrastructure.Common;
     using Infrastructure;
 
     public static class ApplicationInitialization

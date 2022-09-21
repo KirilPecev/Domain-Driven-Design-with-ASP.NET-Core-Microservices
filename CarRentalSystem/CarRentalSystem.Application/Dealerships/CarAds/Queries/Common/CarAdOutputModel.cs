@@ -4,9 +4,7 @@
 
     using AutoMapper;
 
-    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
-
-    using Domain.Models.CarAds;
+    using Domain.Dealerships.Models.CarAds;
 
     public class CarAdOutputModel : IMapFrom<CarAd>
     {

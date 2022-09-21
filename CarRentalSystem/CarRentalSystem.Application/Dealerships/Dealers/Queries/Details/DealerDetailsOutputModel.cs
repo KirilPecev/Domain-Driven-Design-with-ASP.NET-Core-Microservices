@@ -2,11 +2,9 @@
 {
     using AutoMapper;
 
-    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
-
     using Common;
 
-    using Domain.Models.Dealers;
+    using Domain.Dealerships.Models.Dealers;
 
     public class DealerDetailsOutputModel : DealerOutputModel
     {

@@ -1,10 +1,5 @@
 ﻿namespace CarRentalSystem.Web.Features
 {
-    using Application.Features.Identity.Commands.ChangePassword;
-    using Application.Features.Identity.Commands.LoginUser;
-    using Application.Features.Identity.Commands.RegisterUser;
-    using Application.Features.Identity.Common;
-
     using CarRentalSystem.Application.Identity.Commands.ChangePassword;
     using CarRentalSystem.Application.Identity.Commands.LoginUser;
     using CarRentalSystem.Application.Identity.Commands.RegisterUser;

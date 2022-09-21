@@ -1,15 +1,5 @@
 ﻿namespace CarRentalSystem.Web.Features
 {
-    using Application.Features;
-    using Application.Features.CarAds.ChangeAvailability;
-    using Application.Features.CarAds.Commands.Create;
-    using Application.Features.CarAds.Commands.Delete;
-    using Application.Features.CarAds.Commands.Edit;
-    using Application.Features.CarAds.Queries.Categories;
-    using Application.Features.CarAds.Queries.Details;
-    using Application.Features.CarAds.Queries.Mine;
-    using Application.Features.CarAds.Queries.Search;
-
     using CarRentalSystem.Application.Common;
     using CarRentalSystem.Application.Dealerships.CarAds.Commands.ChangeAvailability;
     using CarRentalSystem.Application.Dealerships.CarAds.Commands.Create;

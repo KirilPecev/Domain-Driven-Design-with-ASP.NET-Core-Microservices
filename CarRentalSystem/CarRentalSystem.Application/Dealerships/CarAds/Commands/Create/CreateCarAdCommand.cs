@@ -2,18 +2,13 @@
 {
     using Application.Common.Contracts;
 
-    using CarRentalSystem.Domain.Common.Models;
-    using CarRentalSystem.Domain.Dealerships.Factories.CarAds;
-    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
-    using CarRentalSystem.Domain.Dealerships.Repositories;
-
     using Commands.Common;
 
-    using Domain.Common;
-    using Domain.Factories.CarAds;
-    using Domain.Models.CarAds;
-    using Domain.Models.Dealers;
-    using Domain.Repositories;
+    using Domain.Common.Models;
+    using Domain.Dealerships.Factories.CarAds;
+    using Domain.Dealerships.Models.CarAds;
+    using Domain.Dealerships.Models.Dealers;
+    using Domain.Dealerships.Repositories;
 
     using MediatR;
 

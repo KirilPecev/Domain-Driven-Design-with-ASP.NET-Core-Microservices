@@ -2,15 +2,12 @@
 {
     using AutoMapper;
 
-    using CarRentalSystem.Domain.Common.Models;
-    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
-
     using Common;
 
     using Dealers.Queries.Common;
 
-    using Domain.Common;
-    using Domain.Models.CarAds;
+    using Domain.Common.Models;
+    using Domain.Dealerships.Models.CarAds;
 
     public class CarAdDetailsOutputModel : CarAdOutputModel
     {

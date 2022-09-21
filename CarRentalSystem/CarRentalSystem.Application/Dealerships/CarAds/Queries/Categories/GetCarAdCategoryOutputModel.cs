@@ -2,7 +2,7 @@
 {
     using Application.Common.Mapper;
 
-    using Domain.Models.CarAds;
+    using Domain.Dealerships.Models.CarAds;
 
     public class GetCarAdCategoryOutputModel : IMapFrom<Category>
     {

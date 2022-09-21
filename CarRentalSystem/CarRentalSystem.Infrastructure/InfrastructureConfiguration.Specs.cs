@@ -1,15 +1,15 @@
 ﻿namespace CarRentalSystem.Infrastructure
 {
     using System.Reflection;
-    using CarRentalSystem.Domain.Dealerships.Repositories;
-    using Domain.Repositories;
+
+    using Common.Persistence;
+
+    using Domain.Dealerships.Repositories;
 
     using FluentAssertions;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
-
-    using Persistence;
 
     using Xunit;
 

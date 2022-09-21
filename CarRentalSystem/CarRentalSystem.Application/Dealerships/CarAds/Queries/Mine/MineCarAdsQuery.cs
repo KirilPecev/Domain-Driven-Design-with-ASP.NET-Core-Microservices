@@ -4,10 +4,10 @@
     using System.Threading.Tasks;
 
     using Application.Common.Contracts;
-    using CarRentalSystem.Domain.Dealerships.Repositories;
+
     using Common;
 
-    using Domain.Repositories;
+    using Domain.Dealerships.Repositories;
 
     using MediatR;
 

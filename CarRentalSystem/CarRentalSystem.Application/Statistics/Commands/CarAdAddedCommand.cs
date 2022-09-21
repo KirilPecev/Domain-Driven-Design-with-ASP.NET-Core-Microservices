@@ -3,11 +3,9 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using CarRentalSystem.Domain.Statistics.Repositories;
-
     using Common;
 
-    using Domain.Repositories;
+    using Domain.Statistics.Repositories;
 
     using MediatR;
 

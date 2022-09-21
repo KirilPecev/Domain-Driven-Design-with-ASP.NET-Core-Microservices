@@ -1,9 +1,5 @@
 ﻿namespace CarRentalSystem.Web.Features
 {
-    using Application.Features;
-    using Application.Features.Dealers.Commands.Edit;
-    using Application.Features.Dealers.Queries.Details;
-
     using CarRentalSystem.Application.Common;
     using CarRentalSystem.Application.Dealerships.Dealers.Commands.Edit;
     using CarRentalSystem.Application.Dealerships.Dealers.Queries.Details;

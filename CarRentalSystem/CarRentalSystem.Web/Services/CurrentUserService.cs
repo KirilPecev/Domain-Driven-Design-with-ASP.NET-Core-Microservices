@@ -2,8 +2,6 @@
 {
     using System.Security.Claims;
 
-    using Application.Contracts;
-
     using CarRentalSystem.Application.Common.Contracts;
 
     using Microsoft.AspNetCore.Http;

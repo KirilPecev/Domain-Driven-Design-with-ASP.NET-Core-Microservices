@@ -1,40 +1,27 @@
 ﻿namespace CarRentalSystem.Infrastructure.Identity
 {
-    using System.IdentityModel.Tokens.Jwt;
-    using System.Security.Claims;
-    using System.Text;
-
-    using Application;
     using Application.Common;
-    using Application.Features.Identity;
-    using Application.Features.Identity.Commands;
-    using Application.Features.Identity.Commands.ChangePassword;
-    using Application.Features.Identity.Commands.LoginUser;
-    using Application.Features.Identity.Common;
-
-    using CarRentalSystem.Application.Identity;
-    using CarRentalSystem.Application.Identity.Commands;
-    using CarRentalSystem.Application.Identity.Commands.ChangePassword;
-    using CarRentalSystem.Application.Identity.Commands.LoginUser;
-    using CarRentalSystem.Application.Identity.Common;
+    using Application.Identity;
+    using Application.Identity.Commands;
+    using Application.Identity.Commands.ChangePassword;
+    using Application.Identity.Commands.LoginUser;
+    using Application.Identity.Common;
 
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Options;
-    using Microsoft.IdentityModel.Tokens;
 
     public class IdentityService : IIdentity
     {
         private const string InvalidErrorMessage = "Invalid credentials.";
 
         private readonly UserManager<User> userManager;
-        private readonly ApplicationSettings applicationSettings;
+        private readonly IJwtTokenGenerator jwtTokenGenerator;
 
         public IdentityService(
             UserManager<User> userManager,
-            IOptions<ApplicationSettings> applicationSettings)
+            IJwtTokenGenerator jwtTokenGenerator)
         {
             this.userManager = userManager;
-            this.applicationSettings = applicationSettings.Value;
+            this.jwtTokenGenerator = jwtTokenGenerator;
         }
 
         public async Task<Result> ChangePassword(ChangePasswordInputModel changePasswordInputModel)
@@ -72,7 +59,7 @@
 
             IList<string> roles = await this.userManager.GetRolesAsync(user);
 
-            string token = this.GenerateJwtToken(user.Id, user.Email, roles);
+            string token = this.jwtTokenGenerator.GenerateToken(user, roles);
 
             return new LoginSuccessModel(user.Id, token);
         }
@@ -91,35 +78,6 @@
             }
 
             return identityResult.Succeeded ? Result<IUser>.SuccessWith(user) : Result<IUser>.Failure(errors);
-        }
-
-        private string GenerateJwtToken(string userId, string email, IList<string> roles)
-        {
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            byte[] key = Encoding.ASCII.GetBytes(this.applicationSettings.Secret);
-
-            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.NameIdentifier, userId),
-                    new Claim(ClaimTypes.Name, email)
-                }),
-                Expires = DateTime.UtcNow.AddDays(this.applicationSettings.TokenExpirationDays),
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            foreach (var role in roles)
-            {
-                tokenDescriptor.Subject.AddClaim(new(ClaimTypes.Role, role));
-            }
-
-            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
-            string encryptedToken = tokenHandler.WriteToken(token);
-
-            return encryptedToken;
         }
     }
 }
