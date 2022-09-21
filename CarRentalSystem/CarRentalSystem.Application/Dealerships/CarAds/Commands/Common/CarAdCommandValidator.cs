@@ -3,17 +3,18 @@
     using System;
 
     using Application.Common;
-
+    using CarRentalSystem.Domain.Common.Models;
+    using CarRentalSystem.Domain.Dealerships.Repositories;
     using Domain.Common;
     using Domain.Models.CarAds;
     using Domain.Repositories;
 
     using FluentValidation;
 
-    using static Domain.Models.ModelConstants.CarAd;
-    using static Domain.Models.ModelConstants.Common;
-    using static Domain.Models.ModelConstants.Manufacturer;
-    using static Domain.Models.ModelConstants.Options;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.CarAd;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.Common;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.Manufacturer;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.Options;
 
     public class CarAdCommandValidator<TCommand> : AbstractValidator<CarAdCommand<TCommand>>
         where TCommand : EntityCommand<int>

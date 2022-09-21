@@ -5,6 +5,10 @@
 
     using Application.Common;
 
+    using CarRentalSystem.Domain.Dealerships.Factories.Dealers;
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
+    using CarRentalSystem.Domain.Dealerships.Repositories;
+
     using Domain.Factories.Dealers;
     using Domain.Models.Dealers;
     using Domain.Repositories;

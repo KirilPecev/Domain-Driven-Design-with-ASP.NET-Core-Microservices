@@ -5,7 +5,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    using static Domain.Models.ModelConstants.Category;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.Category;
 
     internal class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {

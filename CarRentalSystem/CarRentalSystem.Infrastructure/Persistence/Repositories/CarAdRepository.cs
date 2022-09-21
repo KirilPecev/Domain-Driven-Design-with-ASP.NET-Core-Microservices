@@ -15,6 +15,10 @@
     using CarRentalSystem.Application.Dealerships.CarAds.Queries.Categories;
     using CarRentalSystem.Application.Dealerships.CarAds.Queries.Common;
     using CarRentalSystem.Application.Dealerships.CarAds.Queries.Details;
+    using CarRentalSystem.Domain.Common;
+    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
+    using CarRentalSystem.Domain.Dealerships.Repositories;
 
     using Common;
 

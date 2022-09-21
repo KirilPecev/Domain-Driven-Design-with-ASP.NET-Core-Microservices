@@ -1,7 +1,7 @@
 ﻿namespace CarRentalSystem.Application.Identity.Commands.LoginUser
 {
     using Application.Common;
-
+    using CarRentalSystem.Domain.Dealerships.Repositories;
     using Domain.Repositories;
 
     using MediatR;

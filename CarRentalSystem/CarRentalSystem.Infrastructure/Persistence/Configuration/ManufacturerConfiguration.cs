@@ -5,7 +5,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    using static Domain.Models.ModelConstants.Manufacturer;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.Manufacturer;
 
     internal class ManufacturerConfiguration : IEntityTypeConfiguration<Manufacturer>
     {

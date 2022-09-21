@@ -1,11 +1,13 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Configuration
 {
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
+
     using Domain.Models.Dealers;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    using static Domain.Models.ModelConstants.Dealer;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.Dealer;
 
     internal class DealerConfiguration : IEntityTypeConfiguration<Dealer>
     {

@@ -1,6 +1,4 @@
 ﻿namespace CarRentalSystem.Domain.Common
 {
-    public interface IAuditable
-    {
-    }
+    public interface IAuditable { }
 }

@@ -1,7 +1,7 @@
 ﻿namespace CarRentalSystem.Infrastructure
 {
     using System.Reflection;
-
+    using CarRentalSystem.Domain.Dealerships.Repositories;
     using Domain.Repositories;
 
     using FluentAssertions;

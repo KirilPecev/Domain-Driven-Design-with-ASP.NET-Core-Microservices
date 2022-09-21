@@ -4,6 +4,8 @@
 
     using AutoMapper;
 
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
+
     using Domain.Models.Dealers;
 
     public class DealerOutputModel : IMapFrom<Dealer>

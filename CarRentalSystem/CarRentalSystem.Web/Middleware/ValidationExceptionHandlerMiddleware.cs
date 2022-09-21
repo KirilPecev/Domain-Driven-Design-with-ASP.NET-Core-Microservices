@@ -5,7 +5,7 @@
     using Application.Exceptions;
 
     using CarRentalSystem.Application.Common.Exceptions;
-
+    using CarRentalSystem.Domain.Common;
     using Domain.Exceptions;
 
     using Microsoft.AspNetCore.Builder;

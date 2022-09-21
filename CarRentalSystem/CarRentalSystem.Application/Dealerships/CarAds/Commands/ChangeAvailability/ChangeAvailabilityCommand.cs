@@ -3,6 +3,9 @@
     using Application.Common;
     using Application.Common.Contracts;
 
+    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
+    using CarRentalSystem.Domain.Dealerships.Repositories;
+
     using Common;
 
     using Domain.Models.CarAds;

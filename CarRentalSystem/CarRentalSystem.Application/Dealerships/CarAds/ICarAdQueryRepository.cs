@@ -2,6 +2,10 @@
 {
     using Application.Common.Contracts;
 
+    using CarRentalSystem.Domain.Common;
+    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
+
     using Domain.Models.CarAds;
     using Domain.Models.Dealers;
     using Domain.Specifications;

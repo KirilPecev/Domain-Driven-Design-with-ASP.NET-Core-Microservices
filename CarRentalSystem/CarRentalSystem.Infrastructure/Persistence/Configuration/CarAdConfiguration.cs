@@ -1,12 +1,14 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Configuration
 {
+    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
+
     using Domain.Models.CarAds;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    using static Domain.Models.ModelConstants.CarAd;
-    using static Domain.Models.ModelConstants.Common;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.CarAd;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.Common;
 
     internal class CarAdConfiguration : IEntityTypeConfiguration<CarAd>
     {

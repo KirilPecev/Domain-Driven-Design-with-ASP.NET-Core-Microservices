@@ -2,8 +2,8 @@
 {
     using FluentValidation;
 
-    using static Domain.Models.ModelConstants.PhoneNumber;
-    using static Domain.Models.ModelConstants.User;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.PhoneNumber;
+    using static CarRentalSystem.Domain.Dealerships.Models.ModelConstants.User;
 
     public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
     {

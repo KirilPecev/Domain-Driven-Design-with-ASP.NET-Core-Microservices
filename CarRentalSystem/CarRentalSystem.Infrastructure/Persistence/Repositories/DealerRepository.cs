@@ -13,6 +13,8 @@
     using CarRentalSystem.Application.Dealerships.Dealers;
     using CarRentalSystem.Application.Dealerships.Dealers.Queries.Common;
     using CarRentalSystem.Application.Dealerships.Dealers.Queries.Details;
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
+    using CarRentalSystem.Domain.Dealerships.Repositories;
 
     using Domain.Exceptions;
     using Domain.Models.Dealers;

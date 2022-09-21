@@ -1,5 +1,6 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Auditable
 {
+    using CarRentalSystem.Domain.Common.Models;
     using Domain.Common;
 
     using Microsoft.EntityFrameworkCore;

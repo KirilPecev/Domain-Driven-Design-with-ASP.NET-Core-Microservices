@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
 
     using Application.Common.Contracts;
-
+    using CarRentalSystem.Domain.Dealerships.Repositories;
     using Common;
 
     using Domain.Repositories;

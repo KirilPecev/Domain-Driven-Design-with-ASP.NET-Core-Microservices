@@ -2,6 +2,11 @@
 {
     using Application.Common.Contracts;
 
+    using CarRentalSystem.Domain.Common.Models;
+    using CarRentalSystem.Domain.Dealerships.Factories.CarAds;
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
+    using CarRentalSystem.Domain.Dealerships.Repositories;
+
     using Commands.Common;
 
     using Domain.Common;

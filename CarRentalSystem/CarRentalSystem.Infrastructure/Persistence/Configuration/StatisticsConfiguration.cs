@@ -1,5 +1,7 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Configuration
 {
+    using CarRentalSystem.Domain.Statistics.Models.Statistics;
+
     using Domain.Models.Statistics;
 
     using Microsoft.EntityFrameworkCore;

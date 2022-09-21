@@ -1,9 +1,10 @@
 ﻿namespace CarRentalSystem.Domain
 {
     using Common;
-    using Factories;
+
+    using Dealerships.Models.CarAds;
+
     using Microsoft.Extensions.DependencyInjection;
-    using Models.CarAds;
 
     public static class DomainConfiguration
     {

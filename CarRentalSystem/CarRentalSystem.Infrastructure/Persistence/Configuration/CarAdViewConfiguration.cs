@@ -1,7 +1,11 @@
 ﻿namespace CarRentalSystem.Infrastructure.Persistence.Configuration
 {
+    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
+    using CarRentalSystem.Domain.Statistics.Models.Statistics;
+
     using Domain.Models.CarAds;
     using Domain.Models.Statistics;
+
     using Infrastructure.Identity;
 
     using Microsoft.EntityFrameworkCore;

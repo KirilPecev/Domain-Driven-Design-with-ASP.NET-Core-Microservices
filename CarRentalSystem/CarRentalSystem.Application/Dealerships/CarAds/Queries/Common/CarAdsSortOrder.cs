@@ -4,6 +4,8 @@
 
     using Application.Common;
 
+    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
+
     using Domain.Models.CarAds;
 
     public class CarAdsSortOrder : SortOrder<CarAd>

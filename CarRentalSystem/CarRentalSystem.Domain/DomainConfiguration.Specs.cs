@@ -1,10 +1,12 @@
 ﻿namespace CarRentalSystem.Domain
 {
-    using Factories.CarAds;
-    using Factories.Dealers;
+    using Dealerships.Factories.CarAds;
+    using Dealerships.Factories.Dealers;
 
     using FluentAssertions;
+
     using Microsoft.Extensions.DependencyInjection;
+
     using Xunit;
 
     public class DomainConfigurationSpecs

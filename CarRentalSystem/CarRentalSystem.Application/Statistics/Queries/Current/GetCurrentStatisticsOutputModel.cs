@@ -2,6 +2,8 @@
 {
     using AutoMapper;
 
+    using CarRentalSystem.Domain.Statistics.Models.Statistics;
+
     using Common.Mapper;
 
     using Domain.Models.Statistics;

@@ -3,6 +3,7 @@
     using Application.Features.Identity;
 
     using CarRentalSystem.Application.Identity;
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
 
     using Domain.Exceptions;
     using Domain.Models.Dealers;

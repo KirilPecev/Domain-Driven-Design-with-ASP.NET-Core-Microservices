@@ -5,10 +5,15 @@
     using System.Threading;
     using System.Threading.Tasks;
 
+    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
+    using CarRentalSystem.Domain.Statistics.Models.Statistics;
+
     using Domain.Common;
     using Domain.Models.CarAds;
     using Domain.Models.Dealers;
     using Domain.Models.Statistics;
+
     using Identity;
 
     using Microsoft.AspNetCore.Http;

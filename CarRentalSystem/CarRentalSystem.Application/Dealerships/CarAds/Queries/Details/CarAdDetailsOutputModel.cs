@@ -2,6 +2,9 @@
 {
     using AutoMapper;
 
+    using CarRentalSystem.Domain.Common.Models;
+    using CarRentalSystem.Domain.Dealerships.Models.CarAds;
+
     using Common;
 
     using Dealers.Queries.Common;

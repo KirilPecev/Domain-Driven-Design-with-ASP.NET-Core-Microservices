@@ -2,6 +2,8 @@
 {
     using Application.Common.Contracts;
 
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
+
     using Domain.Models.Dealers;
 
     using Queries.Common;

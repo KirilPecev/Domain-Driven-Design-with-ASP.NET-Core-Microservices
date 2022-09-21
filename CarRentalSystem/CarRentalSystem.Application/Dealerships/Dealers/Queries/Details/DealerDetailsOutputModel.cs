@@ -2,6 +2,8 @@
 {
     using AutoMapper;
 
+    using CarRentalSystem.Domain.Dealerships.Models.Dealers;
+
     using Common;
 
     using Domain.Models.Dealers;

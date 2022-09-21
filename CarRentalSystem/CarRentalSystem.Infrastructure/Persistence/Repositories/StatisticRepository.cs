@@ -11,6 +11,8 @@
     using CarRentalSystem.Application.Common.Contracts;
     using CarRentalSystem.Application.Statistics;
     using CarRentalSystem.Application.Statistics.Queries.Current;
+    using CarRentalSystem.Domain.Statistics.Models.Statistics;
+    using CarRentalSystem.Domain.Statistics.Repositories;
 
     using Domain.Models.Statistics;
     using Domain.Repositories;
