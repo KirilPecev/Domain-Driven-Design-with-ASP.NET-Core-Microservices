@@ -2,9 +2,14 @@
 {
     using Application.Common;
     using Application.Contracts;
+
+    using CarRentalSystem.Application.Common.Contracts;
+
     using FluentValidation;
+
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
+
     using Services;
 
     public static class WebConfiguration

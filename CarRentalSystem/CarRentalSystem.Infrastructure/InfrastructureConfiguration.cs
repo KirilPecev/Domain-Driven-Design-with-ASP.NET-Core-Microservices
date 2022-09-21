@@ -6,6 +6,10 @@
     using Application.Contracts;
     using Application.Features.Identity;
 
+    using CarRentalSystem.Application.Common;
+    using CarRentalSystem.Application.Common.Contracts;
+    using CarRentalSystem.Application.Identity;
+
     using Configuration;
 
     using Domain.Common;

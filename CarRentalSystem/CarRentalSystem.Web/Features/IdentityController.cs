@@ -5,6 +5,11 @@
     using Application.Features.Identity.Commands.RegisterUser;
     using Application.Features.Identity.Common;
 
+    using CarRentalSystem.Application.Identity.Commands.ChangePassword;
+    using CarRentalSystem.Application.Identity.Commands.LoginUser;
+    using CarRentalSystem.Application.Identity.Commands.RegisterUser;
+    using CarRentalSystem.Application.Identity.Common;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

@@ -4,6 +4,8 @@
 
     using Application.Contracts;
 
+    using CarRentalSystem.Application.Common.Contracts;
+
     using Microsoft.AspNetCore.Http;
 
     public class CurrentUserService : ICurrentUser

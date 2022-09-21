@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity;
 
-    using static Application.Features.Identity.Common.UserRoles;
+    using static CarRentalSystem.Application.Identity.Common.UserRoles;
 
     internal static class IdentityUserSeeder
     {

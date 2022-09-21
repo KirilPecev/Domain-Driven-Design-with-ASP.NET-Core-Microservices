@@ -1,6 +1,9 @@
 ﻿namespace CarRentalSystem.Infrastructure.Identity
 {
     using Application.Features.Identity;
+
+    using CarRentalSystem.Application.Identity;
+
     using Domain.Exceptions;
     using Domain.Models.Dealers;
 

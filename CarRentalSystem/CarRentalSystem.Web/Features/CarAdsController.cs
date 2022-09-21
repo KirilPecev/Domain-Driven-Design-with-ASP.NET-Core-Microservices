@@ -10,7 +10,16 @@
     using Application.Features.CarAds.Queries.Mine;
     using Application.Features.CarAds.Queries.Search;
 
-    using CarRentalSystem.Application.Features.Identity.Common;
+    using CarRentalSystem.Application.Common;
+    using CarRentalSystem.Application.Dealerships.CarAds.Commands.ChangeAvailability;
+    using CarRentalSystem.Application.Dealerships.CarAds.Commands.Create;
+    using CarRentalSystem.Application.Dealerships.CarAds.Commands.Delete;
+    using CarRentalSystem.Application.Dealerships.CarAds.Commands.Edit;
+    using CarRentalSystem.Application.Dealerships.CarAds.Queries.Categories;
+    using CarRentalSystem.Application.Dealerships.CarAds.Queries.Details;
+    using CarRentalSystem.Application.Dealerships.CarAds.Queries.Mine;
+    using CarRentalSystem.Application.Dealerships.CarAds.Queries.Search;
+    using CarRentalSystem.Application.Identity.Common;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

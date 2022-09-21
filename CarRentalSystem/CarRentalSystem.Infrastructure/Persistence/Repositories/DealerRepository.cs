@@ -10,6 +10,10 @@
 
     using AutoMapper;
 
+    using CarRentalSystem.Application.Dealerships.Dealers;
+    using CarRentalSystem.Application.Dealerships.Dealers.Queries.Common;
+    using CarRentalSystem.Application.Dealerships.Dealers.Queries.Details;
+
     using Domain.Exceptions;
     using Domain.Models.Dealers;
     using Domain.Repositories;

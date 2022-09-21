@@ -2,6 +2,8 @@
 {
     using Application.Contracts;
 
+    using CarRentalSystem.Application.Common.Contracts;
+
     using Infrastructure.Configuration;
 
     using Microsoft.Extensions.Caching.Memory;

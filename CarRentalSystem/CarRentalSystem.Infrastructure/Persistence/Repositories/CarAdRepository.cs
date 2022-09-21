@@ -10,6 +10,12 @@
 
     using AutoMapper;
 
+    using CarRentalSystem.Application.Common.Contracts;
+    using CarRentalSystem.Application.Dealerships.CarAds;
+    using CarRentalSystem.Application.Dealerships.CarAds.Queries.Categories;
+    using CarRentalSystem.Application.Dealerships.CarAds.Queries.Common;
+    using CarRentalSystem.Application.Dealerships.CarAds.Queries.Details;
+
     using Common;
 
     using Domain.Models.CarAds;

@@ -3,6 +3,9 @@
     using Application.Features.Statistics.Queries.CarAdViews;
     using Application.Features.Statistics.Queries.Current;
 
+    using CarRentalSystem.Application.Statistics.Queries.CarAdViews;
+    using CarRentalSystem.Application.Statistics.Queries.Current;
+
     using Microsoft.AspNetCore.Mvc;
 
     public class StatisticsController : ApiController

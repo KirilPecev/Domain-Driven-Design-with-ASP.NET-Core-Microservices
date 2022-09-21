@@ -8,6 +8,10 @@
 
     using AutoMapper;
 
+    using CarRentalSystem.Application.Common.Contracts;
+    using CarRentalSystem.Application.Statistics;
+    using CarRentalSystem.Application.Statistics.Queries.Current;
+
     using Domain.Models.Statistics;
     using Domain.Repositories;
 

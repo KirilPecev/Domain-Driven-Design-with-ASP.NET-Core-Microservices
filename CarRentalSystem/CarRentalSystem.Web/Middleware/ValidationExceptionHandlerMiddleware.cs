@@ -3,10 +3,14 @@
     using System.Net;
 
     using Application.Exceptions;
+
+    using CarRentalSystem.Application.Common.Exceptions;
+
     using Domain.Exceptions;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
+
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
 

@@ -12,6 +12,12 @@
     using Application.Features.Identity.Commands.LoginUser;
     using Application.Features.Identity.Common;
 
+    using CarRentalSystem.Application.Identity;
+    using CarRentalSystem.Application.Identity.Commands;
+    using CarRentalSystem.Application.Identity.Commands.ChangePassword;
+    using CarRentalSystem.Application.Identity.Commands.LoginUser;
+    using CarRentalSystem.Application.Identity.Common;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;

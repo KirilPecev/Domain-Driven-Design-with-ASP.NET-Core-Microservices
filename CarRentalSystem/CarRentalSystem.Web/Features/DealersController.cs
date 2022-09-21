@@ -4,7 +4,10 @@
     using Application.Features.Dealers.Commands.Edit;
     using Application.Features.Dealers.Queries.Details;
 
-    using CarRentalSystem.Application.Features.Identity.Common;
+    using CarRentalSystem.Application.Common;
+    using CarRentalSystem.Application.Dealerships.Dealers.Commands.Edit;
+    using CarRentalSystem.Application.Dealerships.Dealers.Queries.Details;
+    using CarRentalSystem.Application.Identity.Common;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
