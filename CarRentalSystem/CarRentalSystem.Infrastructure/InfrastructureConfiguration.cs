@@ -46,7 +46,7 @@
                    .AddClasses(classes => classes
                        .AssignableTo(typeof(IDomainRepository<>))
                        .AssignableTo(typeof(IQueryRepository<>)))
-                   .AsMatchingInterface()
+                   .AsImplementedInterfaces()
                    .WithTransientLifetime());
 
         private static IServiceCollection AddIdentity(this IServiceCollection services, IConfiguration configuration)
@@ -89,6 +89,7 @@
                 });
 
             services.AddTransient<IIdentity, IdentityService>();
+            services.AddTransient<IJwtTokenGenerator, JwtTokenGeneratorService>();
 
             return services;
         }
