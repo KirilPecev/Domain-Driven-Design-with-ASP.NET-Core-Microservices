@@ -4,7 +4,7 @@
 
     using Common.Mapper;
 
-    using Domain.Statistics.Models.Statistics;
+    using Domain.Statistics.Models;
 
     public class GetCurrentStatisticsOutputModel : IMapFrom<Statistic>
     {

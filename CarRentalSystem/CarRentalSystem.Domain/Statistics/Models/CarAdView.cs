@@ -1,4 +1,4 @@
-﻿namespace CarRentalSystem.Domain.Statistics.Models.Statistics
+﻿namespace CarRentalSystem.Domain.Statistics.Models
 {
     using Common.Models;
 
@@ -6,8 +6,8 @@
     {
         internal CarAdView(int carAdId, string? userId)
         {
-            CarAdId = carAdId;
-            UserId = userId;
+            this.CarAdId = carAdId;
+            this.UserId = userId;
         }
 
         public int CarAdId { get; }

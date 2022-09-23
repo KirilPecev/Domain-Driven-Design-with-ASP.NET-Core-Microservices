@@ -1,11 +1,16 @@
 ﻿namespace CarRentalSystem.Domain.Common.Models
 {
-    public abstract class Entity<TId>
+    public abstract class Entity<TId> : IEntity
         where TId : struct
     {
-        // TODO: Add events logic
+        private readonly ICollection<IDomainEvent> events;
 
         public TId Id { get; private set; }
+
+        public IReadOnlyCollection<IDomainEvent> Events
+            => this.events.ToList().AsReadOnly();
+
+        protected Entity() => this.events = new List<IDomainEvent>();
 
         public override bool Equals(object? obj)
         {
@@ -32,5 +37,10 @@
         public static bool operator !=(Entity<TId>? first, Entity<TId>? second) => !(first == second);
 
         public override int GetHashCode() => (GetType().ToString() + Id).GetHashCode();
+
+        public void ClearEvents() => this.events.Clear();
+
+        protected void RaiseEvent(IDomainEvent domainEvent)
+            => this.events.Add(domainEvent);
     }
 }

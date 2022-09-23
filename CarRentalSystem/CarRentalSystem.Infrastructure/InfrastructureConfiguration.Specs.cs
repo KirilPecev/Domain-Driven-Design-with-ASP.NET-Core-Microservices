@@ -2,7 +2,10 @@
 {
     using System.Reflection;
 
+    using Common.Events;
     using Common.Persistence;
+
+    using Dealerships;
 
     using Domain.Dealerships.Repositories;
 
@@ -19,12 +22,15 @@
         public void AddRepositoriesShouldRegisterRepositories()
         {
             // Arrange
-            var serviceCollection = new ServiceCollection()
+            IServiceCollection serviceCollection = new ServiceCollection()
                 .AddDbContext<CarRentalDbContext>(opts => opts
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString()));
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()))
+                .AddScoped<IDealershipDbContext>(provider => provider
+                    .GetService<CarRentalDbContext>())
+                .AddTransient<IEventDispatcher, EventDispatcher>();
 
             // Act
-            var services = serviceCollection
+            ServiceProvider services = serviceCollection
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddRepositories()
                 .BuildServiceProvider();

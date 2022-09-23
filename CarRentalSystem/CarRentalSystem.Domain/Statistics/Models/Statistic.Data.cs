@@ -1,4 +1,4 @@
-﻿namespace CarRentalSystem.Domain.Statistics.Models.Statistics
+﻿namespace CarRentalSystem.Domain.Statistics.Models
 {
     using Common;
 

@@ -5,6 +5,8 @@
     using Common;
     using Common.Models;
 
+    using Events;
+
     using Exceptions;
 
     using static ModelConstants.Dealer;
@@ -54,9 +56,9 @@
 
         public void AddCarAd(CarAd carAd)
         {
-            carAds.Add(carAd);
+            this.carAds.Add(carAd);
 
-            // TODO: Add RaiseEvent() when carAd is added
+            this.RaiseEvent(new CarAdAddedEvent());
         }
 
         private void Validate(string name)

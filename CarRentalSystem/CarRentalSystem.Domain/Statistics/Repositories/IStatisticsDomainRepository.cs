@@ -2,7 +2,7 @@
 {
     using Common;
 
-    using Models.Statistics;
+    using Models;
 
     public interface IStatisticsDomainRepository : IDomainRepository<Statistic>
     {

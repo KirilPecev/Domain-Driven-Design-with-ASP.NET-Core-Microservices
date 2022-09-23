@@ -1,6 +1,6 @@
 ﻿namespace CarRentalSystem.Infrastructure.Statistics.Configuration
 {
-    using Domain.Statistics.Models.Statistics;
+    using Domain.Statistics.Models;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;

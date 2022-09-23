@@ -7,12 +7,15 @@
 
     using Auditable;
 
+    using Common.Events;
+
     using Dealerships;
 
     using Domain.Common;
+    using Domain.Common.Models;
     using Domain.Dealerships.Models.CarAds;
     using Domain.Dealerships.Models.Dealers;
-    using Domain.Statistics.Models.Statistics;
+    using Domain.Statistics.Models;
 
     using Identity;
 
@@ -27,11 +30,18 @@
         IStatisticsDbContext
     {
         private readonly string userId;
+        private readonly IEventDispatcher eventDispatcher;
 
-        public CarRentalDbContext(DbContextOptions<CarRentalDbContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
+        public CarRentalDbContext(
+            DbContextOptions<CarRentalDbContext> options,
+            IHttpContextAccessor httpContextAccessor,
+            IEventDispatcher eventDispatcher)
+            : base(options)
         {
             ClaimsPrincipal? user = httpContextAccessor.HttpContext?.User;
             userId = user?.FindFirstValue(ClaimTypes.NameIdentifier) ?? "Unauthenticated user";
+
+            this.eventDispatcher = eventDispatcher;
         }
 
         public DbSet<CarAd> CarAds { get; set; } = default!;
@@ -57,13 +67,36 @@
 
         public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
-            List<AuditEntry> auditEntries = OnBeforeSaveChanges();
+            List<AuditEntry> auditEntries = this.OnBeforeSaveChanges();
+
+            await this.DispatchEvents();
 
             int result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
 
-            await OnAfterSaveChangesAsync(auditEntries);
+            await this.OnAfterSaveChangesAsync(auditEntries);
 
             return result;
+        }
+
+        private async Task DispatchEvents()
+        {
+            IEntity[] entities = this.ChangeTracker
+                            .Entries<IEntity>()
+                            .Select(e => e.Entity)
+                            .Where(e => e.Events.Any())
+                            .ToArray();
+
+            foreach (var entity in entities)
+            {
+                IDomainEvent[] events = entity.Events.ToArray();
+
+                entity.ClearEvents();
+
+                foreach (var domainEvent in events)
+                {
+                    await this.eventDispatcher.Dispatch(domainEvent);
+                }
+            }
         }
 
         private Task OnAfterSaveChangesAsync(List<AuditEntry> auditEntries)
@@ -84,14 +117,14 @@
                 }
             }
 
-            AuditEntries.AddRange(auditEntries);
+            this.AuditEntries.AddRange(auditEntries);
 
             return SaveChangesAsync();
         }
 
         private List<AuditEntry> OnBeforeSaveChanges()
         {
-            ChangeTracker.DetectChanges();
+            this.ChangeTracker.DetectChanges();
             List<AuditEntry> entries = new();
 
             foreach (var entry in ChangeTracker.Entries())

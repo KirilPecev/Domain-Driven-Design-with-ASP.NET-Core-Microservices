@@ -1,7 +1,7 @@
 ﻿namespace CarRentalSystem.Infrastructure.Statistics.Configuration
 {
     using Domain.Dealerships.Models.CarAds;
-    using Domain.Statistics.Models.Statistics;
+    using Domain.Statistics.Models;
 
     using Infrastructure.Identity;
 

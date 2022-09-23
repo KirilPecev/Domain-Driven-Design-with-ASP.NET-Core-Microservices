@@ -19,7 +19,17 @@
                     options => options.BindNonPublicProperties = true)
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddMediatR(Assembly.GetExecutingAssembly())
+                .AddEventHandlers()
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>))
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+
+        private static IServiceCollection AddEventHandlers(this IServiceCollection services)
+            => services
+                .Scan(scan => scan
+                    .FromCallingAssembly()
+                    .AddClasses(classes => classes
+                        .AssignableTo(typeof(IEventHandler<>)))
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime());
     }
 }

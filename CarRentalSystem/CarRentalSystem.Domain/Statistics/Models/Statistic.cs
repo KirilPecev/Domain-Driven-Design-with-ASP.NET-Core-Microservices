@@ -1,4 +1,4 @@
-﻿namespace CarRentalSystem.Domain.Statistics.Models.Statistics
+﻿namespace CarRentalSystem.Domain.Statistics.Models
 {
     using Common;
 
@@ -8,18 +8,18 @@
 
         internal Statistic()
         {
-            TotalCarAds = 0;
-            carAdViews = new HashSet<CarAdView>();
+            this.TotalCarAds = 0;
+            this.carAdViews = new HashSet<CarAdView>();
         }
 
         public int TotalCarAds { get; private set; }
 
         public IReadOnlyCollection<CarAdView> CarAdViews
-            => carAdViews.ToList().AsReadOnly();
+            => this.carAdViews.ToList().AsReadOnly();
 
-        public void AddCarAd() => TotalCarAds++;
+        public void AddCarAd() => this.TotalCarAds++;
 
         public void AddCarAdView(int carAdId, string? userId)
-            => carAdViews.Add(new CarAdView(carAdId, userId));
+            => this.carAdViews.Add(new CarAdView(carAdId, userId));
     }
 }

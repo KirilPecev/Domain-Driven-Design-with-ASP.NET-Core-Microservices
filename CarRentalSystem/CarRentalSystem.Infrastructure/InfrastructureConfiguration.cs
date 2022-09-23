@@ -13,6 +13,8 @@
 
     using Identity;
 
+    using Infrastructure.Common.Events;
+
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -28,7 +30,8 @@
                 .AddDatabase(configuration)
                 .AddRepositories()
                 .AddIdentity(configuration)
-                .AddCache(configuration);
+                .AddCache(configuration)
+                .AddTransient<IEventDispatcher, EventDispatcher>();
 
         private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
             => services

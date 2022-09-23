@@ -2,7 +2,7 @@
 {
     using Common.Persistence;
 
-    using Domain.Statistics.Models.Statistics;
+    using Domain.Statistics.Models;
 
     using Microsoft.EntityFrameworkCore;
 
