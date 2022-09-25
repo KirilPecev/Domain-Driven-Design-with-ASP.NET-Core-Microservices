@@ -1,8 +1,8 @@
 ﻿namespace CarRentalSystem.Application.Statistics
 {
-    using CarRentalSystem.Domain.Statistics.Models;
-
     using Common.Contracts;
+
+    using Domain.Statistics.Models;
 
     using Queries.Current;
 

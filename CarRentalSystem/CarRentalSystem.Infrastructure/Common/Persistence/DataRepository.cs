@@ -18,9 +18,9 @@
 
         public async Task Save(TEntity entity, CancellationToken cancellationToken = default)
         {
-            Data.Add(entity);
+            this.Data.Update(entity);
 
-            await Data.SaveChangesAsync(cancellationToken);
+            await this.Data.SaveChangesAsync(cancellationToken);
         }
     }
 }

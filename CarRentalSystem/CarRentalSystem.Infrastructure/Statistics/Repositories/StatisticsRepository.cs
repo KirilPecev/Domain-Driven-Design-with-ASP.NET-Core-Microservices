@@ -34,7 +34,7 @@
                 .ProjectTo<GetCurrentStatisticsOutputModel>(this.All())
                 .SingleOrDefaultAsync(cancellationToken);
 
-        public async Task<bool> IncrementCarAds(CancellationToken cancellationToken)
+        public async Task IncrementCarAds(CancellationToken cancellationToken)
         {
             Statistic? statistics = await this.Data
                 .Statistics
@@ -43,8 +43,6 @@
             statistics.AddCarAd();
 
             await this.Save(statistics, cancellationToken);
-
-            return true;
         }
     }
 }

@@ -6,6 +6,8 @@
 
     using Microsoft.Extensions.DependencyInjection;
 
+    using Statistics.Models;
+
     public static class DomainConfiguration
     {
         public static IServiceCollection AddDomain(this IServiceCollection services)
@@ -16,6 +18,7 @@
                         .AssignableTo(typeof(IFactory<>)))
                     .AsMatchingInterface()
                     .WithTransientLifetime())
-            .AddTransient<IInitialData, CategoryData>();
+            .AddTransient<IInitialData, CategoryData>()
+            .AddTransient<IInitialData, StatisticData>();
     }
 }
