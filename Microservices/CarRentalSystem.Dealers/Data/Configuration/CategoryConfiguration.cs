@@ -1,13 +1,11 @@
 ﻿namespace CarRentalSystem.Dealers.Data.Configuration
 {
-    using CarRentalSystem.Dealers.Data.Models;
-
-    using Domain.Dealerships.Models.CarAds;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    using static CarRentalSystem.Dealers.Data.ModelConstants.Category;
+    using Models;
+
+    using static DataConstants.Category;
 
     internal class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {

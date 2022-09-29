@@ -1,11 +1,23 @@
 ﻿namespace CarRentalSystem.Dealers.Data.Configuration
 {
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    using Models;
+
+    using static CarRentalSystem.Data.DataConstants.Common;
+    using static DataConstants.CarAd;
+
     internal class CarAdConfiguration : IEntityTypeConfiguration<CarAd>
     {
         public void Configure(EntityTypeBuilder<CarAd> builder)
         {
             builder
                 .HasKey(c => c.Id);
+
+            builder
+                .Property(c => c.Id)
+                .UseHiLo(nameof(CarAd));
 
             builder
                 .HasIndex(c => c.IsAvailable);
@@ -32,13 +44,13 @@
             builder
                 .HasOne(c => c.Manufacturer)
                 .WithMany()
-                .HasForeignKey("ManufacturerId")
+                .HasForeignKey(c => c.ManufacturerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
                 .HasOne(c => c.Category)
                 .WithMany()
-                .HasForeignKey("CategoryId")
+                .HasForeignKey(c => c.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
@@ -46,20 +58,12 @@
                 {
                     o.WithOwner();
 
-                    o.Property(op => op.NumberOfSeats);
-                    o.Property(op => op.HasClimateControl);
+                    o.Property(op => op.NumberOfSeats).IsRequired();
 
-                    o.OwnsOne(
-                        op => op.TransmissionType,
-                        t =>
-                        {
-                            t.WithOwner();
+                    o.Property(op => op.HasClimateControl).IsRequired();
 
-                            t.Property(tr => tr.Value);
-                            t.Ignore(tr => tr.Name);
-                        });
+                    o.Property(op => op.TransmissionType).IsRequired();
                 });
-
         }
     }
 }

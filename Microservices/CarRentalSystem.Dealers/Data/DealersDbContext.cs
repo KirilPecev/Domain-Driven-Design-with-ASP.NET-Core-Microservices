@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-
-namespace CarRentalSystem.Dealers.Data
+﻿namespace CarRentalSystem.Dealers.Data
 {
+    using System.Reflection;
+
+    using CarRentalSystem.Data;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Models;
+
     public class DealersDbContext : MessageDbContext
     {
         public DealersDbContext(DbContextOptions<DealersDbContext> options)
@@ -11,6 +16,7 @@ namespace CarRentalSystem.Dealers.Data
         }
 
         public DbSet<CarAd> CarAds { get; set; }
+
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Manufacturer> Manufacturers { get; set; }

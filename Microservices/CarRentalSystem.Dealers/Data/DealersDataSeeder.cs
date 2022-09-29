@@ -1,12 +1,14 @@
-﻿using CarRentalSystem.Dealers.Data.Models;
-
-namespace CarRentalSystem.Dealers.Data
+﻿namespace CarRentalSystem.Dealers.Data
 {
-    using CarRentalSystem.Dealers.Data.Models;
+    using CarRentalSystem.Data;
 
     using Microsoft.Extensions.Options;
 
-    using CarOptions = Options;
+    using Models;
+
+    using Services.Data;
+
+    using CarOptions = Models.Options;
 
     public class DealersDataSeeder : IDataSeeder
     {

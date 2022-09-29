@@ -1,6 +1,6 @@
 ﻿namespace CarRentalSystem.Dealers.Data
 {
-    public class ModelConstants
+    public class DataConstants
     {
         public class User
         {
@@ -9,12 +9,6 @@
             public const int MaxPasswordLength = 100;
             public const int MinNameLength = 1;
             public const int MaxNameLength = 100;
-        }
-
-        public class Common
-        {
-            public const int MaxUrlLength = 2048;
-            public const int Zero = 0;
         }
 
         public class Dealer
