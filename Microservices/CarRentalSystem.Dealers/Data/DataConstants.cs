@@ -2,15 +2,6 @@
 {
     public class DataConstants
     {
-        public class User
-        {
-            public const int MinEmailLength = 5;
-            public const int MaxEmailLength = 50;
-            public const int MaxPasswordLength = 100;
-            public const int MinNameLength = 1;
-            public const int MaxNameLength = 100;
-        }
-
         public class Dealer
         {
             public const int MinNameLength = 3;

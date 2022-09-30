@@ -1,4 +1,4 @@
-using CarRentalSystem.Dealers;
+using CarRentalSystem.Dealers.Infrastructure;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +13,7 @@ WebApplication app = builder.Build();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
