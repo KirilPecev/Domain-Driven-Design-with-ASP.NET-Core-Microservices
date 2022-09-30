@@ -1,12 +1,11 @@
 ﻿namespace CarRentalSystem.Dealers.Data
 {
     using CarRentalSystem.Data;
+    using CarRentalSystem.Services.Data;
 
     using Microsoft.Extensions.Options;
 
     using Models;
-
-    using Services.Data;
 
     using CarOptions = Models.Options;
 
