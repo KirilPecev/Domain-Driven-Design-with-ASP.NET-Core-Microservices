@@ -1,25 +1,40 @@
-var builder = WebApplication.CreateBuilder(args);
+using CarRentalSystem.Identity.Infrastructure;
+using CarRentalSystem.Notifications;
+using CarRentalSystem.Notifications.Hub;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddServices(builder.Configuration);
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
+
+string allowedOrigins = builder.Configuration
+    .GetSection(nameof(NotificationSettings))
+    .GetValue<string>(nameof(NotificationSettings.AllowedOrigins));
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+
+app.UseCors(opt => opt
+    .WithOrigins(allowedOrigins)
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials());
+
+app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints => endpoints
+    .MapHub<NotificationsHub>("/notifications"));
 
 app.Run();
