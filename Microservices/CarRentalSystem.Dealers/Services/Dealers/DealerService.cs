@@ -56,22 +56,18 @@
                     .Where(d => d.CarAds.Any(c => c.Id == carAdId)))
                 .SingleOrDefaultAsync();
 
-        public Task<int> GetIdByUser(
-            string userId)
+        public Task<int> GetIdByUser(string userId)
             => this.FindByUser(userId, dealer => dealer.Id);
 
-        public Task<Dealer> FindByUser(
-            string userId)
+        public Task<Dealer> FindByUser(string userId)
             => this.FindByUser(userId, dealer => dealer);
 
         public async Task<Dealer> FindById(int id)
             => await this.Data.FindAsync<Dealer>(id);
 
-        private async Task<T> FindByUser<T>(
-            string userId,
-            Expression<Func<Dealer, T>> selector)
+        private async Task<T> FindByUser<T>(string userId, Expression<Func<Dealer, T>> selector)
         {
-            var dealerData = await this
+            T dealerData = await this
                 .All()
                 .Where(u => u.UserId == userId)
                 .Select(selector)

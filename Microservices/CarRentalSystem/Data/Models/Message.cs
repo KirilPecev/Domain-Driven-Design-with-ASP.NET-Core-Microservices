@@ -9,8 +9,7 @@
     {
         private string serializedData;
 
-        public Message(object data)
-            => this.Data = data;
+        public Message(object data) => this.Data = data;
 
         private Message() { }
 

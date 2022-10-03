@@ -29,7 +29,7 @@
 
         public async Task Save(params object[] messages)
         {
-            var dataMessages = messages.ToDictionary(data => data, data => new Message(data));
+            Dictionary<object, Message> dataMessages = messages.ToDictionary(data => data, data => new Message(data));
 
             if (this.Data is MessageDbContext)
             {

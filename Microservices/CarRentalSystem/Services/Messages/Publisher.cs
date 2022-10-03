@@ -8,8 +8,7 @@
 
         private readonly IBus bus;
 
-        public Publisher(IBus bus)
-            => this.bus = bus;
+        public Publisher(IBus bus) => this.bus = bus;
 
         public Task Publish<TMessage>(TMessage message)
             => this.bus.Publish(message, GetCancellationToken());
