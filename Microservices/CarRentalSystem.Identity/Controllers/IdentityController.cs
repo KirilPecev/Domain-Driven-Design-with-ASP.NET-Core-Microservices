@@ -1,12 +1,11 @@
 ﻿namespace CarRentalSystem.Identity.Controllers
 {
     using CarRentalSystem.Controllers;
+    using CarRentalSystem.Infrastructure;
     using CarRentalSystem.Services;
     using CarRentalSystem.Services.Identity;
 
     using Data.Models;
-
-    using Infrastructure;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -59,10 +58,6 @@
         [Route(nameof(ChangePassword))]
         [AuthorizeAdministratorAndUser]
         public async Task<ActionResult> ChangePassword(ChangePasswordInputModel input)
-            => await this.identity.ChangePassword(this.currentUser.UserId, new ChangePasswordInputModel
-            {
-                CurrentPassword = input.CurrentPassword,
-                NewPassword = input.NewPassword
-            });
+            => await this.identity.ChangePassword(this.currentUser.UserId, input);
     }
 }

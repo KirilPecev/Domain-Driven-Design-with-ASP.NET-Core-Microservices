@@ -1,7 +1,6 @@
 ﻿namespace CarRentalSystem.Identity.Infrastructure
 {
     using CarRentalSystem.Infrastructure;
-    using CarRentalSystem.Infrastructure.Identity;
     using CarRentalSystem.Services.Data;
 
     using Data;
