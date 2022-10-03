@@ -20,13 +20,17 @@
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddWebService<TDbContext>(
-            this IServiceCollection services, IConfiguration configuration)
+            this IServiceCollection services,
+            IConfiguration configuration,
+            bool databaseHealthChecks = true,
+            bool messagingHealthChecks = true)
             where TDbContext : DbContext
         {
             services
                 .AddDatabase<TDbContext>(configuration)
                 .AddApplicationSettings(configuration)
                 .AddTokenAuthentication(configuration)
+                .AddHealth(configuration, databaseHealthChecks, messagingHealthChecks)
                 .AddAutoMapperProfile(Assembly.GetCallingAssembly())
                 .AddControllers();
 
@@ -126,8 +130,6 @@
                             host.Password(messageQueueSettings.Password);
                         });
 
-                        //rmq.UseHealthCheck(context);
-
                         Array.ForEach(consumers, consumer => rmq.ReceiveEndpoint(consumer.FullName, endpoint =>
                         {
                             endpoint.PrefetchCount = 6;
@@ -138,6 +140,34 @@
 
                     }));
                 });
+
+            return services;
+        }
+
+        public static IServiceCollection AddHealth(
+           this IServiceCollection services,
+           IConfiguration configuration,
+           bool databaseHealthChecks = true,
+           bool messagingHealthChecks = true)
+        {
+            IHealthChecksBuilder healthChecks = services.AddHealthChecks();
+
+            if (databaseHealthChecks)
+            {
+                healthChecks
+                    .AddSqlServer(configuration.GetDefaultConnectionString());
+            }
+
+            if (messagingHealthChecks)
+            {
+                MessageQueueSettings messageQueueSettings = GetMessageQueueSettings(configuration);
+
+                string messageQueueConnectionString =
+                    $"amqp://{messageQueueSettings.Username}:{messageQueueSettings.Password}@{messageQueueSettings.Host}/";
+
+                healthChecks
+                    .AddRabbitMQ(rabbitConnectionString: messageQueueConnectionString);
+            }
 
             return services;
         }

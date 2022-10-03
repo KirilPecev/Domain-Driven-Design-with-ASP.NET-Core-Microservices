@@ -31,7 +31,6 @@ app.UseCors(opt => opt
     .AllowCredentials());
 
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints => endpoints
