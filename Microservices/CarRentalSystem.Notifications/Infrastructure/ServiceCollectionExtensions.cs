@@ -11,7 +11,8 @@
             => services
                 .AddCors()
                 .AddTokenAuthentication(configuration, JwtConfiguration.BearerEvents)
-                .AddMessaging(configuration, consumers: typeof(CarAdCreatedConsumer))
+                .AddHealth(configuration, databaseHealthChecks: false)
+                .AddMessaging(configuration, usePolling: false, consumers: typeof(CarAdCreatedConsumer))
                 .AddSignalR();
     }
 }

@@ -3,11 +3,16 @@
     using System.Reflection;
     using System.Text;
 
+    using CarRentalSystem.Messages;
     using CarRentalSystem.Services.Messages;
+
+    using Hangfire;
+    using Hangfire.SqlServer;
 
     using MassTransit;
 
     using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.Data.SqlClient;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -109,6 +114,7 @@
         public static IServiceCollection AddMessaging(
             this IServiceCollection services,
             IConfiguration configuration,
+            bool usePolling = true,
             params Type[] consumers)
         {
             services
@@ -140,6 +146,31 @@
 
                     }));
                 });
+
+            if (usePolling)
+            {
+                CreateHangfireDatabase(configuration);
+
+                services
+                    .AddHangfire(config => config
+                        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                        .UseSimpleAssemblyNameTypeSerializer()
+                        .UseRecommendedSerializerSettings()
+                        .UseSqlServerStorage(
+                            configuration.GetCronJobsConnectionString(),
+                            new SqlServerStorageOptions
+                            {
+                                CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                                SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                                QueuePollInterval = TimeSpan.Zero,
+                                UseRecommendedIsolationLevel = true,
+                                DisableGlobalLocks = true
+                            }));
+
+                services.AddHangfireServer();
+
+                services.AddHostedService<MessagesHostedService>();
+            }
 
             return services;
         }
@@ -180,6 +211,25 @@
                 settings.GetValue<string>(nameof(MessageQueueSettings.Host)),
                 settings.GetValue<string>(nameof(MessageQueueSettings.Username)),
                 settings.GetValue<string>(nameof(MessageQueueSettings.Password)));
+        }
+
+        private static void CreateHangfireDatabase(IConfiguration configuration)
+        {
+            string connectionString = configuration.GetCronJobsConnectionString();
+
+            string dbName = connectionString
+                .Split(";")[1]
+                .Split("=")[1];
+
+            using SqlConnection connection = new SqlConnection(connectionString.Replace(dbName, "master"));
+
+            connection.Open();
+
+            using SqlCommand command = new SqlCommand(
+                $"IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'{dbName}') create database [{dbName}];",
+                connection);
+
+            command.ExecuteNonQuery();
         }
     }
 }

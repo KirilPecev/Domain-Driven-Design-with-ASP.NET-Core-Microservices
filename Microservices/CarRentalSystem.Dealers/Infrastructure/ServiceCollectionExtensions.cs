@@ -19,6 +19,7 @@
                 .AddTransient<IDealerService, DealerService>()
                 .AddTransient<ICategoryService, CategoryService>()
                 .AddTransient<ICarAdService, CarAdService>()
-                .AddTransient<IManufacturerService, ManufacturerService>();
+                .AddTransient<IManufacturerService, ManufacturerService>()
+                .AddMessaging(configuration);
     }
 }
