@@ -1,4 +1,5 @@
 using CarRentalSystem.Identity.Infrastructure;
+using CarRentalSystem.Infrastructure;
 using CarRentalSystem.Notifications;
 using CarRentalSystem.Notifications.Hub;
 
@@ -34,6 +35,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints => endpoints
+    .MapHealthChecks()
     .MapHub<NotificationsHub>("/notifications"));
 
 app.Run();

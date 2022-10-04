@@ -130,7 +130,7 @@
                             host.Password(messageQueueSettings.Password);
                         });
 
-                        Array.ForEach(consumers, consumer => rmq.ReceiveEndpoint(consumer.FullName, endpoint =>
+                        consumers.ForEach(consumer => rmq.ReceiveEndpoint(consumer.FullName, endpoint =>
                         {
                             endpoint.PrefetchCount = 6;
                             endpoint.UseMessageRetry(retry => retry.Interval(5, 200));
