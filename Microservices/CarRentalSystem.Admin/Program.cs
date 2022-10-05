@@ -4,7 +4,6 @@ using CarRentalSystem.Infrastructure;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddServices(builder.Configuration);
-
 // Add services to the container.
 WebApplication app = builder.Build();
 
