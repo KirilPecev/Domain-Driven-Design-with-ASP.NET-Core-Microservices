@@ -14,13 +14,13 @@
     public class IdentityDataSeeder : IDataSeeder
     {
         private readonly UserManager<User> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<Role> roleManager;
         private readonly ApplicationSettings applicationSettings;
         private readonly IdentitySettings identitySettings;
 
         public IdentityDataSeeder(
             UserManager<User> userManager,
-            RoleManager<IdentityRole> roleManager,
+            RoleManager<Role> roleManager,
             IOptions<ApplicationSettings> applicationSettings,
             IOptions<IdentitySettings> identitySettings)
         {
@@ -37,7 +37,7 @@
                 Task
                     .Run(async () =>
                     {
-                        var adminRole = new IdentityRole(Constants.AdministratorRoleName);
+                        Role adminRole = new Role() { Name = Constants.AdministratorRoleName };
 
                         await this.roleManager.CreateAsync(adminRole);
 
