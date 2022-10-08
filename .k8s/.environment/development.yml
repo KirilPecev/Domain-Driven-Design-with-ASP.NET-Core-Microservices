@@ -16,7 +16,7 @@ data:
   watchdog-notifications-health: http://notifications-service:5004/health
   watchdog-admin-health: http://admin-client:5000/health
   
-  ---
+---
 
 apiVersion: v1
 kind: Secret
