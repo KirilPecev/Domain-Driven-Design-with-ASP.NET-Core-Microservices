@@ -37,11 +37,11 @@
                 Task
                     .Run(async () =>
                     {
-                        Role adminRole = new Role() { Name = Constants.AdministratorRoleName };
+                        Role adminRole = new Role() { Name = Constants.AdministratorRoleName, Description = "Admin" };
 
                         await this.roleManager.CreateAsync(adminRole);
 
-                        var adminUser = new User
+                        User adminUser = new User
                         {
                             UserName = "admin@crs.com",
                             Email = "admin@crs.com",
@@ -66,7 +66,7 @@
                             return;
                         }
 
-                        var defaultUser = new User
+                        User defaultUser = new User
                         {
                             Id = DataSeederConstants.DefaultUserId,
                             UserName = "coolcars@crs.com",
