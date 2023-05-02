@@ -115,11 +115,15 @@
             this IServiceCollection services,
             IConfiguration configuration,
             bool usePolling = true,
+            bool addDbMessages = true,
             params Type[] consumers)
         {
-            services
-                .AddTransient<IPublisher, Publisher>()
-                .AddTransient<IMessageService, MessageService>();
+            if (addDbMessages)
+            {
+                services
+                    .AddTransient<IPublisher, Publisher>()
+                    .AddTransient<IMessageService, MessageService>();
+            }
 
             MessageQueueSettings messageQueueSettings = GetMessageQueueSettings(configuration);
 

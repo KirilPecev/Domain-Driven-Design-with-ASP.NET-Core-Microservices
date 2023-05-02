@@ -12,7 +12,7 @@
                 .AddCors()
                 .AddTokenAuthentication(configuration, JwtConfiguration.BearerEvents)
                 .AddHealth(configuration, databaseHealthChecks: false)
-                .AddMessaging(configuration, usePolling: false, consumers: typeof(CarAdCreatedConsumer))
+                .AddMessaging(configuration, usePolling: false, addDbMessages: false, consumers: typeof(CarAdCreatedConsumer))
                 .AddSignalR();
     }
 }
