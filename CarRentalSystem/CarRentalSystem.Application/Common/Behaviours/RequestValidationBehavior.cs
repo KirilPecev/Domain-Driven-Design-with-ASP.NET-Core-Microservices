@@ -18,8 +18,8 @@
 
         public Task<TResponse> Handle(
             TRequest request,
-            CancellationToken cancellationToken,
-            RequestHandlerDelegate<TResponse> next)
+            RequestHandlerDelegate<TResponse> next,
+            CancellationToken cancellationToken)
         {
             ValidationContext<TRequest> context = new ValidationContext<TRequest>(request);
 

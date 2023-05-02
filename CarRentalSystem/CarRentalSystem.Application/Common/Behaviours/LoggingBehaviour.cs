@@ -20,8 +20,8 @@
 
         public async Task<TResponse> Handle(
             TRequest request,
-            CancellationToken cancellationToken,
-            RequestHandlerDelegate<TResponse> next)
+            RequestHandlerDelegate<TResponse> next,
+            CancellationToken cancellationToken)
         {
             // Request
             logger.LogInformation($"Handling {typeof(TRequest).Name}");
