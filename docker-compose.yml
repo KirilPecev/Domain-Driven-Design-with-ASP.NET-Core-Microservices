@@ -39,7 +39,7 @@ services:
             - "5001:80"
         env_file: /Microservices/CarRentalSystem/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CarRentalIdentityDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CarRentalIdentityDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true;TrustServerCertificate=True
             - IdentitySettings__AdminPassword=adminpass12!
         restart: on-failure
         volumes:
@@ -59,8 +59,8 @@ services:
             - "5002:80"
         env_file: /Microservices/CarRentalSystem/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CarRentalDealersDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
-            - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=CarRentalDealersCronJobsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CarRentalDealersDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true;TrustServerCertificate=True
+            - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=CarRentalDealersCronJobsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true;TrustServerCertificate=True
             - MessageQueueSettings__Host=rabbitmq
             - MessageQueueSettings__UserName=rabbitmquser
             - MessageQueueSettings__Password=rabbitmqPassword12!
@@ -83,8 +83,8 @@ services:
             - "5003:80"
         env_file: /Microservices/CarRentalSystem/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CarRentalStatisticsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
-            - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=CarRentalStatisticsCronJobsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CarRentalStatisticsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true;TrustServerCertificate=True
+            - ConnectionStrings__CronJobsConnection=Server=sqlserver;Database=CarRentalStatisticsCronJobsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true;TrustServerCertificate=True
             - MessageQueueSettings__Host=rabbitmq
             - MessageQueueSettings__UserName=rabbitmquser
             - MessageQueueSettings__Password=rabbitmqPassword12!
