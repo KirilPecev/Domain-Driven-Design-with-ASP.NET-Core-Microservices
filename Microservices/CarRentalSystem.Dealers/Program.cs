@@ -12,6 +12,7 @@ WebApplication app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.UseWebService(app.Environment);
+
 app.Initialize();
 
 app.Run();

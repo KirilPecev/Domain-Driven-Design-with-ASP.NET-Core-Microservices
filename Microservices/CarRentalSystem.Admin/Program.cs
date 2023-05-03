@@ -20,6 +20,7 @@ else
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -28,8 +29,8 @@ app.UseJwtCookieAuthentication();
 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints => endpoints
-        .MapHealthChecks()
-        .MapDefaultControllerRoute());
+app.MapHealthChecks();
+
+app.MapDefaultControllerRoute();
 
 app.Run();

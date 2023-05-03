@@ -32,10 +32,11 @@ app.UseCors(opt => opt
     .AllowCredentials());
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints => endpoints
-    .MapHealthChecks()
-    .MapHub<NotificationsHub>("/notifications"));
+app.MapHealthChecks();
+
+app.MapHub<NotificationsHub>("/notifications");
 
 app.Run();

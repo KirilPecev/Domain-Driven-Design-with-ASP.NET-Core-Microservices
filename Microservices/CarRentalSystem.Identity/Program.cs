@@ -10,7 +10,9 @@ builder.Services.AddServices(builder.Configuration);
 WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 app.UseWebService(app.Environment);
+
 app.Initialize();
 
 app.Run();

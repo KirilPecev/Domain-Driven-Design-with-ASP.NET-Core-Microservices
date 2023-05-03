@@ -11,7 +11,6 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseEndpoints(endpoints => endpoints
-    .MapHealthChecksUI(healthChecks => healthChecks.UIPath = "/healthchecks"));
+app.UseHealthChecksUI(config => config.UIPath = "/healthchecks");
 
 app.Run();
