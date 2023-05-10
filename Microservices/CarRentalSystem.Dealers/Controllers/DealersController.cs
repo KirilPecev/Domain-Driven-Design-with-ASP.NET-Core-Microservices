@@ -24,7 +24,7 @@
         }
 
         [HttpGet]
-        [Route(Id)]
+        [Route($"{nameof(this.Details)}/{Id}")]
         public async Task<ActionResult<DealerDetailsOutputModel>> Details(int id) => await this.dealers.GetDetails(id);
 
         [HttpGet]
@@ -85,7 +85,6 @@
         }
 
         [HttpGet]
-        [AuthorizeAdministrator]
         public async Task<IEnumerable<DealerDetailsOutputModel>> All() => await this.dealers.GetAll();
     }
 }

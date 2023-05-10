@@ -12,7 +12,7 @@
         [Get("/Dealers")]
         Task<IEnumerable<DealerDetailsOutputModel>> All();
 
-        [Get("/Dealers/{id}")]
+        [Get("/Dealers/Details/{id}")]
         Task<DealerDetailsOutputModel> Details(int id);
 
         [Put("/Dealers/{id}")]
