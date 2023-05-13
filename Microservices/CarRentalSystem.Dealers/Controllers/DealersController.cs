@@ -24,7 +24,7 @@
         }
 
         [HttpGet]
-        [Route($"{nameof(this.Details)}/{Id}")]
+        [Route($"{nameof(this.Details)}{PathSeparator}{Id}")]
         public async Task<ActionResult<DealerDetailsOutputModel>> Details(int id) => await this.dealers.GetDetails(id);
 
         [HttpGet]
