@@ -13,10 +13,13 @@
                 ?? throw new InvalidOperationException($"Messages can only be used with a {nameof(MessageDbContext)}.");
 
         public async Task<bool> IsDuplicated(object messageData, string propertyFilter, object identifier)
-            => await this.data
+        {
+            string prop = $"$.{propertyFilter}";
+
+            return await this.data
                 .Messages
-                .FromSqlRaw($"SELECT * FROM Messages WHERE Type = '{0}' AND JSON_VALUE(serializedData, '$.{1}') = {2}",
-                                    messageData.GetType().AssemblyQualifiedName, propertyFilter, identifier)
+                .FromSqlInterpolated($"SELECT * FROM Messages WHERE Type = {messageData.GetType().AssemblyQualifiedName} AND JSON_VALUE(serializedData, {prop}) = {identifier}")
                 .AnyAsync();
+        }
     }
 }
