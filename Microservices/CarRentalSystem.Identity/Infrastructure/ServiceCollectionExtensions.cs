@@ -13,8 +13,8 @@
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
             => services
                 .ConfigureSettings(configuration)
-                .AddWebService<IdentityDbContext>(configuration, messagingHealthChecks: false)
                 .AddUserStorage()
+                .AddWebService<IdentityDbContext>(configuration, messagingHealthChecks: false)
                 .AddTransient<IDataSeeder, IdentityDataSeeder>()
                 .AddTransient<IIdentityService, IdentityService>()
                 .AddTransient<IJwtTokenGeneratorService, JwtTokenGeneratorService>();
